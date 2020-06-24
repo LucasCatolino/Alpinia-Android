@@ -2,6 +2,7 @@ package com.example.Alpinia;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -175,6 +176,35 @@ public class ApiClient {
 
     public Call<Result<Boolean>> unlockDoor(String deviceId, Callback<Result<Boolean>> callback) {
         Call<Result<Boolean>> call = this.service.executeActionOnDoor(deviceId, "unlock");
+        call.enqueue(callback);
+        return call;
+    }
+
+    //------------------------- FAUCET ----------------------------------------
+
+    public Call<Result<FaucetState>> getFaucetState(String deviceId, Callback<Result<FaucetState>> callback) {
+        Call<Result<FaucetState>> call = this.service.getFaucetState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> openFaucet(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.openOrCloseFaucet(deviceId, "open");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> closeFaucet(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.openOrCloseFaucet(deviceId, "close");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> dispenseExactAmount(String deviceId, Integer amount, String unit, Callback<Result<Boolean>> callback) {
+        ArrayList<Object> aux = new ArrayList<>();
+        aux.add(amount);
+        aux.add(unit);
+        Call<Result<Boolean>> call = this.service.dispenseExactAmount(deviceId, "setLevel", aux);
         call.enqueue(callback);
         return call;
     }

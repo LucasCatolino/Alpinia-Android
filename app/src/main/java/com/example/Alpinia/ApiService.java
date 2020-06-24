@@ -1,5 +1,6 @@
 package com.example.Alpinia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -87,6 +88,20 @@ public interface ApiService {
     @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
     Call<Result<Boolean>> executeActionOnDoor(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+
+    //--------------------------- FAUCET -----------------------------
+
+    @GET("devices/{deviceId}/state")
+    Call<Result<FaucetState>> getFaucetState(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> openOrCloseFaucet(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> dispenseExactAmount(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body ArrayList<Object> data);
 
 
 
