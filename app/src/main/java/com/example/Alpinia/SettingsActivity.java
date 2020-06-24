@@ -51,25 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
             });
         }
     }
-/*
-    //Mostrar el overflow
-    public boolean onCreateOptionsMenu (Menu menu) {
-        getMenuInflater().inflate(R.menu.overflow, menu);
-        return true;
-    }
 
-    //Asignar las funciones al overflow
-    public boolean onOptionsItemSelected (MenuItem item) {
-        int id= item.getItemId();
-        if (id== R.id.overflow_refresh) {
-            Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
-        } else if (id== R.id.overflow_settings) {
-
-            Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-*/
         private void switchNotifications(Boolean isChecked) {
             //TODO
         }

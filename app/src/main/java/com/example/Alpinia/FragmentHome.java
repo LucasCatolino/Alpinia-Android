@@ -66,6 +66,8 @@ public class FragmentHome extends Fragment {
         newRoomName = (EditText) vista.findViewById(R.id.newRoom);
         recyclerView = (RecyclerView) vista.findViewById(R.id.roomList);
 
+        updateView();
+
         if (addRoomBttn != null) {
             addRoomBttn.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -74,7 +76,7 @@ public class FragmentHome extends Fragment {
                 }
             });
         }
-        getHomeRooms();
+        updateView();
         return vista;
     }
 
@@ -96,7 +98,7 @@ public class FragmentHome extends Fragment {
                             public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
 
                                 if (response.isSuccessful()){
-                                    getHomeRooms();
+                                    updateView();
                                 } else {
                                     handleError(response);
                                 }
@@ -107,7 +109,6 @@ public class FragmentHome extends Fragment {
                                 handleUnexpectedError(t);
                             }
                         });
-
                     }
                 } else {
                     handleError(response);
@@ -121,9 +122,6 @@ public class FragmentHome extends Fragment {
         });
 
    }
-
-
-
 
     private void getHomeRooms() {
 
@@ -151,13 +149,10 @@ public class FragmentHome extends Fragment {
         });
     }
 
-
     private void showResult(String result) {
         String format = getResources().getString(R.string.result);
         resultTextView.setText(String.format(format, result));
     }
-
-
 
     private <T> void handleError(Response<T> response) {
         Error error = ApiClient.getInstance().getError(response.errorBody());
@@ -169,4 +164,9 @@ public class FragmentHome extends Fragment {
         String LOG_TAG = "App";
         Log.e(LOG_TAG, t.toString());
     }
+
+    private void updateView() {
+        getHomeRooms();
+    }
+
 }

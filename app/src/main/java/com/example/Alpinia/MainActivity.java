@@ -1,5 +1,6 @@
 package com.example.Alpinia;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected (MenuItem item) {
         int id= item.getItemId();
         if (id== R.id.overflow_refresh) {
+
             Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
         } else if (id== R.id.overflow_settings) {
             Intent i= new Intent(this, SettingsActivity.class);
