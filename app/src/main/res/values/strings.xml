@@ -30,6 +30,13 @@
     <string name="light_title">Lights</string>
     <string name="ligth_brightness">Brightness</string>
 
+    <!-- Door -->
+    <string name="door_title">Door</string>
+    <string name="door_open">Open</string>
+    <string name="door_close">Close</string>
+    <string name="door_lock">Locked</string>
+    <string name="door_unlock">Unlocked</string>
+
     <!-- Parlante -->
     <string name="status_playing">Playing</string>
     <string name="status_paused">Paused</string>

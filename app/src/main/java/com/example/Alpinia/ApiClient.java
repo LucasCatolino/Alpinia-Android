@@ -147,5 +147,40 @@ public class ApiClient {
     }
 
 
+    //------------------------- DOOR ----------------------------------------
+
+    public Call<Result<DoorState>> getDoorState(String deviceId, Callback<Result<DoorState>> callback) {
+        Call<Result<DoorState>> call = this.service.getDoorState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> openDoor(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnDoor(deviceId, "open");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> closeDoor(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnDoor(deviceId, "close");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> lockDoor(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnDoor(deviceId, "lock");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> unlockDoor(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnDoor(deviceId, "unlock");
+        call.enqueue(callback);
+        return call;
+    }
+
+
+
+
 
 }

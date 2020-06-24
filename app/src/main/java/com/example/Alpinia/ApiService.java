@@ -79,4 +79,15 @@ public interface ApiService {
     Call<Result<String>> setLightColor(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
 
 
+    //--------------------------- DOOR -----------------------------
+
+    @GET("devices/{deviceId}/state")
+    Call<Result<DoorState>> getDoorState(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> executeActionOnDoor(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+
+
 }
