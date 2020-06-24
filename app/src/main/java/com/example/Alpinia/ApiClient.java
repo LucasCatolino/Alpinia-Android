@@ -211,6 +211,45 @@ public class ApiClient {
 
 
 
+    //------------------------- REFRIGERATOR ----------------------------------------
+
+    public Call<Result<RefrigeratorState>> getRefrigeratorState(String deviceId, Callback<Result<RefrigeratorState>> callback) {
+        Call<Result<RefrigeratorState>> call = this.service.getRefrigeratorState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> changeRefrigeratorMode(String deviceId, String newMode, Callback<Result<Boolean>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newMode;
+
+        Call<Result<Boolean>> call = this.service.changeRefrigeratorMode(deviceId, "setMode", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Integer>> setFridgeTemp(String deviceId, Integer newTemp, Callback<Result<Integer>> callback) {
+        Integer [] aux = new Integer[1];
+        aux[0] = newTemp;
+
+        Call<Result<Integer>> call = this.service.setFridgeTemp(deviceId, "setTemperature", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Integer>> setFreezerTemp(String deviceId, Integer newTemp, Callback<Result<Integer>> callback) {
+        Integer [] aux = new Integer[1];
+        aux[0] = newTemp;
+
+        Call<Result<Integer>> call = this.service.setFreezerTemp(deviceId, "setFreezerTemperature", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+
+
+
+
 
 
 }

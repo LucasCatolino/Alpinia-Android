@@ -39,7 +39,7 @@ public class DoorDialog extends Fragment {
 
     private void init(View view) {
         api = ApiClient.getInstance();
-        switchOpenClose = view.findViewById(R.id.open_close_switch);
+        switchOpenClose = view.findViewById(R.id.open_close_door);
         switckLockUnlock = view.findViewById(R.id.lock_unlock_switch);
 
         api.getDoorState(deviceId, new Callback<Result<DoorState>>() {

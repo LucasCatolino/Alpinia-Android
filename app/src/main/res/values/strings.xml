@@ -77,6 +77,47 @@
         <item>Rock</item>
     </string-array>
 
+
+    <!-- Heladera -->
+    <string name="refrigerator_title">Refrigerator</string>
+    <string name="refrigerator_mode">Mode</string>
+    <string-array name="refrigerator_mode_options">
+        <item>Default</item>
+        <item>Vacation</item>
+        <item>Party</item>
+    </string-array>
+
+    <string name="fridge_temperature">Temperature of the Fridge</string>
+    <string-array name="fridge_temperature_options">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="freezer_temperature">Temperature of the Freezer</string>
+    <string-array name="freezer_temperature_options">
+        <item>-20</item>
+        <item>-19</item>
+        <item>-18</item>
+        <item>-17</item>
+        <item>-16</item>
+        <item>-15</item>
+        <item>-14</item>
+        <item>-13</item>
+        <item>-12</item>
+        <item>-11</item>
+        <item>-10</item>
+        <item>-9</item>
+        <item>-8</item>
+    </string-array>
+
+
+
+
     <string name="no_results">You don\'t have any homes!</string>
 
     <!-- Manejo de errores -->
