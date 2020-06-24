@@ -41,6 +41,7 @@ public class HomesActivity extends AppCompatActivity {
         addHomeBttn = findViewById(R.id.btnAddHome);
         newHomeName = findViewById(R.id.newHome);
         recyclerView = findViewById(R.id.homeList);
+        getHomes();
         if (addHomeBttn != null) {
             addHomeBttn.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -50,7 +51,6 @@ public class HomesActivity extends AppCompatActivity {
             });
         }
         getHomes();
-
     }
 
     public void getHomes() {
