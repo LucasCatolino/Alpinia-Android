@@ -76,6 +76,18 @@ public class FragmentHome extends Fragment {
                 }
             });
         }
+
+        if (newRoomName != null) {
+            newRoomName.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    newRoomName.setFocusable(true);
+                    newRoomName.setFocusableInTouchMode(true);
+                    newRoomName.setEnabled(true);
+                }
+            });
+        }
+
         updateView();
         return vista;
     }
