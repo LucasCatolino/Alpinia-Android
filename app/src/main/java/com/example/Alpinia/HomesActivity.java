@@ -2,10 +2,13 @@ package com.example.Alpinia;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +44,7 @@ public class HomesActivity extends AppCompatActivity {
         addHomeBttn = findViewById(R.id.btnAddHome);
         newHomeName = findViewById(R.id.newHome);
         recyclerView = findViewById(R.id.homeList);
-        getHomes();
+        updateView();
         if (addHomeBttn != null) {
             addHomeBttn.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -50,6 +53,31 @@ public class HomesActivity extends AppCompatActivity {
                 }
             });
         }
+        updateView();
+    }
+
+    //Mostrar el overflow
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+    //Asignar las funciones al overflow
+    public boolean onOptionsItemSelected (MenuItem item) {
+        int id= item.getItemId();
+        if (id== R.id.overflow_refresh) {
+            updateView();
+            Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
+        } else if (id== R.id.overflow_settings) {
+            Intent i= new Intent(this, SettingsActivity.class);
+            startActivity(i);
+
+            Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updateView() {
         getHomes();
     }
 
@@ -88,7 +116,7 @@ public class HomesActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Result<Home> result = response.body();
                     if (result != null) {
-                        getHomes();
+                        updateView();
                         home.setId(result.getResult().getId());
                     }
                 } else {
@@ -113,5 +141,8 @@ public class HomesActivity extends AppCompatActivity {
     private void handleUnexpectedError(Throwable t) {
         String LOG_TAG = "App";
         Log.e(LOG_TAG, t.toString());
+        if ((t.toString().contains("connect")) || (t.toString().contains("Unable to resolve host"))){
+            Toast.makeText(getApplicationContext(), "Connection problems", Toast.LENGTH_SHORT).show();
+        }
     }
 }

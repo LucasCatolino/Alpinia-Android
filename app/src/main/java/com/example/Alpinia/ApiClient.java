@@ -19,7 +19,7 @@ public class ApiClient {
     private static ApiClient instance = null;
     // Use IP 10.0.2.2 instead of 127.0.0.1 when running Android emulator in the
     // same computer that runs the API.
-    private final String BaseURL = "http://10.0.2.2:8080/api/";
+    private String BaseURL = "http://10.0.2.2:8080/api/";
 
     private ApiClient() {
         retrofit = new Retrofit.Builder()
@@ -36,6 +36,13 @@ public class ApiClient {
         return instance;
     }
 
+    public void setBaseURL(String newURL){
+        String a= "http://";
+        String b= ":8080/api/";
+        BaseURL=a+newURL+b;
+        retrofit = new Retrofit.Builder() .baseUrl(BaseURL) .addConverterFactory(GsonConverterFactory.create()).build();
+        this.service= retrofit.create(ApiService.class);
+    }
     public Error getError(ResponseBody response) {
         Converter<ResponseBody, ErrorResult> errorConverter =
                 this.retrofit.responseBodyConverter(ErrorResult.class, new Annotation[0]);
@@ -209,6 +216,11 @@ public class ApiClient {
         return call;
     }
 
+    public String getBaseURL() {
+																						   
+							   
+        return BaseURL;
+    }
 
 
     //------------------------- REFRIGERATOR ----------------------------------------

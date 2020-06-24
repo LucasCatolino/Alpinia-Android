@@ -75,6 +75,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         private void changeIPAddress() {
+            ApiClient.getInstance().setBaseURL(newIPAddress.getText().toString());
+            Toast.makeText(getApplicationContext(), "IP Address: "+ ApiClient.getInstance().getBaseURL(), Toast.LENGTH_LONG).show();
             //TODO
         }
 
