@@ -4,7 +4,7 @@ public class Lamp extends Device {
     final static private String ID = "go46xmbqeomjrsjr";
     LampState state;
     public Lamp(String name) {
-        super(name, new Type(ID));
+        super(name, new DeviceType(ID));
     }
 
     @Override

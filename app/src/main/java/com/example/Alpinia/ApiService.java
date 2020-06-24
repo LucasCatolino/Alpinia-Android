@@ -61,5 +61,22 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     Call<Result<Device>> addDevice(@Body Device device);
 
+    //--------------------------- LIGHTS -----------------------------
+
+    @GET("devices/{deviceId}/state")
+    Call<Result<LightsState>> getLightState(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> turnOnOrOffLight(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Integer>> setLightIntensity(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body Integer [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<String>> setLightColor(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
+
 
 }

@@ -107,6 +107,45 @@ public class ApiClient {
         return call;
     };
 
+    //------------------------- LIGHTS ----------------------------------------
+
+
+    public Call<Result<LightsState>> getLightState(String deviceId, Callback<Result<LightsState>> callback) {
+        Call<Result<LightsState>> call = this.service.getLightState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> turnLightsOn(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.turnOnOrOffLight(deviceId, "turnOn");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> turnLightsOff(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.turnOnOrOffLight(deviceId, "turnOff");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Integer>> setLightIntensity(String deviceId, Integer newIntensity, Callback<Result<Integer>> callback) {
+        Integer [] aux = new Integer[1];
+        aux[0] = newIntensity;
+
+        Call<Result<Integer>> call = this.service.setLightIntensity(deviceId, "setIntensity", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<String>> setLightColor(String deviceId, String newColor, Callback<Result<String>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newColor;
+
+        Call<Result<String>> call = this.service.setLightColor(deviceId, "setColor", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
 
 
 }

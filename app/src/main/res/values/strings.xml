@@ -25,6 +25,11 @@
     <string name="get_rooms">Get Rooms</string>
     <string name="result">Result: %1$s</string>
 
+
+    <!-- Ligth -->
+    <string name="light_title">Lights</string>
+    <string name="ligth_brightness">Brightness</string>
+
     <!-- Parlante -->
     <string name="status_playing">Playing</string>
     <string name="status_paused">Paused</string>
