@@ -40,7 +40,7 @@
             </intent-filter-->
         </activity>
         <activity
-            android:name="com.example.Alpinia.RoomActivity"
+            android:name="com.example.Alpinia.DeviceActivity"
             android:label="@string/room_activity"
             android:parentActivityName="HomesActivity">
             <!--intent-filter>

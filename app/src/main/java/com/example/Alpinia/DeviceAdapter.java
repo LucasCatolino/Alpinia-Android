@@ -40,8 +40,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
             public void onClick(View v) {
 
                 /*
-
-                Intent intent = new Intent(context, RoomActivity.class);
+                Acá vamos a tener que ver de que tipo de device estamos hablando.
+                Intent intent = new Intent(context, XXXXX.class);
                 intent.putExtra("deviceId",devices.get(position).getId());
                 context.startActivity(intent);
 

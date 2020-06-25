@@ -1,4 +1,4 @@
-package com.example.Alpinia;
+package com.example.Alpinia.ui.rooms;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Room;
+import com.example.Alpinia.DeviceActivity;
+import com.example.Alpinia.R;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RoomActivity.class);
+                Intent intent = new Intent(context, DeviceActivity.class);
                 intent.putExtra("roomId",rooms.get(position).getId());
                 context.startActivity(intent);
             }

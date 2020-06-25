@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RoomActivity extends AppCompatActivity {
+public class DeviceActivity extends AppCompatActivity {
     List<Device> devicesList;
     Context context;
     String roomId;

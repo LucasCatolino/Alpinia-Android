@@ -1,4 +1,4 @@
-package com.example.Alpinia.ui.home;
+package com.example.Alpinia.ui.rooms;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,13 +28,12 @@ import retrofit2.Response;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.API.objects.RoomMeta;
-import com.example.Alpinia.RoomsAdapter;
 
 import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class FragmentHome extends Fragment {
+public class FragmentRooms extends Fragment {
 
 
     private Button createRoomButton;
