@@ -1,9 +1,7 @@
-package com.example.Alpinia;
+package com.example.Alpinia.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +12,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Error;
+import com.example.Alpinia.MainActivity;
 import com.example.Alpinia.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.example.Alpinia.ui.home.HomeViewModel;
+import com.example.Alpinia.API.objects.Result;
+import com.example.Alpinia.API.objects.Room;
+import com.example.Alpinia.API.objects.RoomMeta;
+import com.example.Alpinia.RoomsAdapter;
 
-import java.io.Console;
-import java.sql.SQLOutput;
 import java.util.List;
 
 import static java.lang.Thread.sleep;

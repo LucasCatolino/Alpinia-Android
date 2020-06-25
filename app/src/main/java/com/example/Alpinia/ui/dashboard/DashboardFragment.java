@@ -10,21 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.Alpinia.ApiClient;
-import com.example.Alpinia.Device;
-import com.example.Alpinia.Error;
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.Error;
 
-import com.example.Alpinia.Lamp;
-import com.example.Alpinia.LampState;
+import com.example.Alpinia.API.objects.devices.Lamp;
 import com.example.Alpinia.R;
-import com.example.Alpinia.Result;
-import com.example.Alpinia.Room;
-import com.example.Alpinia.Type;
+import com.example.Alpinia.API.objects.Result;
 
 import retrofit2.Call;
 import retrofit2.Callback;

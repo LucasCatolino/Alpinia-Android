@@ -1,4 +1,15 @@
-package com.example.Alpinia;
+package com.example.Alpinia.API;
+
+import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.DoorState;
+import com.example.Alpinia.API.objects.Error;
+import com.example.Alpinia.API.objects.ErrorResult;
+import com.example.Alpinia.API.objects.devices.FaucetState;
+import com.example.Alpinia.API.objects.Home;
+import com.example.Alpinia.API.objects.devices.LightsState;
+import com.example.Alpinia.API.objects.devices.RefrigeratorState;
+import com.example.Alpinia.API.objects.Result;
+import com.example.Alpinia.API.objects.Room;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -11,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 
 public class ApiClient {
     private Retrofit retrofit = null;

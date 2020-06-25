@@ -8,7 +8,7 @@
     android:paddingTop="4dp"
     android:paddingRight="4dp"
     android:paddingBottom="4dp"
-    tools:context=".FragmentHome">
+    tools:context=".ui.home.FragmentHome">
 
     <Button
         android:id="@+id/btnAddRoom"

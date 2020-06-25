@@ -1,4 +1,13 @@
-package com.example.Alpinia;
+package com.example.Alpinia.API;
+
+import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.DoorState;
+import com.example.Alpinia.API.objects.devices.FaucetState;
+import com.example.Alpinia.API.objects.Home;
+import com.example.Alpinia.API.objects.devices.LightsState;
+import com.example.Alpinia.API.objects.devices.RefrigeratorState;
+import com.example.Alpinia.API.objects.Result;
+import com.example.Alpinia.API.objects.Room;
 
 import java.util.ArrayList;
 import java.util.List;

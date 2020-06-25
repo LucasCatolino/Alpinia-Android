@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.Alpinia.API.ApiClient;
+
 public class SettingsActivity extends AppCompatActivity {
     private Switch switchNotifications;
     EditText newIPAddress;

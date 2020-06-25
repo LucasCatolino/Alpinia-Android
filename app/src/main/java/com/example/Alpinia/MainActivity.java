@@ -1,21 +1,17 @@
 package com.example.Alpinia;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Alpinia.API.objects.Room;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,14 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button createRoomButton;
-    private Button modifyRoomButton;
-    private Button deleteRoomButton;
-    private Button getRoomButton;
-    private Button getRoomsButton;
-    private TextView resultTextView;
-    private Room room;
-    private int index = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

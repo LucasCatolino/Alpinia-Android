@@ -1,7 +1,6 @@
-package com.example.Alpinia;
+package com.example.Alpinia.API.objects.devices;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.R;
 
 

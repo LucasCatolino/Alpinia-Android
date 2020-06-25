@@ -2,7 +2,6 @@ package com.example.Alpinia;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.internal.bind.util.ISO8601Utils;
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.Error;
+import com.example.Alpinia.API.objects.Result;
 
 import java.util.List;
 

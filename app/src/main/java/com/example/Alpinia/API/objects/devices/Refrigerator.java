@@ -1,5 +1,7 @@
-package com.example.Alpinia;
+package com.example.Alpinia.API.objects.devices;
 
+import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.DeviceType;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

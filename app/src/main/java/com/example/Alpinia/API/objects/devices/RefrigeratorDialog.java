@@ -1,4 +1,4 @@
-package com.example.Alpinia;
+package com.example.Alpinia.API.objects.devices;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,11 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Result;
+import com.example.Alpinia.R;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

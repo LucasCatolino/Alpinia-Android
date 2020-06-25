@@ -1,11 +1,8 @@
 package com.example.Alpinia;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Error;
+import com.example.Alpinia.API.objects.Home;
+import com.example.Alpinia.API.objects.Result;
+
 import java.util.List;
 
 import retrofit2.Call;
