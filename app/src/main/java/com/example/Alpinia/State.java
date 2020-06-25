@@ -1,4 +1,6 @@
 package com.example.Alpinia;
 
-public abstract class State {
+public interface State<T> {
+    public T getState();
+    public void setState();
 }

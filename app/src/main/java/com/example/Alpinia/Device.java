@@ -14,9 +14,7 @@ public class Device {
     @SerializedName("type")
     @Expose
     protected DeviceType type;
-    @SerializedName("state")
-    @Expose
-    protected State state;
+
     @SerializedName("meta")
     @Expose
     protected Meta meta;
@@ -26,12 +24,7 @@ public class Device {
         this.type = type;
         this.meta = null;
     }
-    public Device(String name, DeviceType type, State state){
-        this.name = name;
-        this.type = type;
-        this.state = state;
-        this.meta = null;
-    }
+
 
     public Device() {}
 
@@ -59,13 +52,6 @@ public class Device {
         this.type = type;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
 
     public Meta getMeta() {
         return meta;
@@ -81,7 +67,6 @@ public class Device {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
-                ", state=" + state +
                 ", meta=" + meta +
                 '}';
     }

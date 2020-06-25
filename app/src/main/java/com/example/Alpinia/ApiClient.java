@@ -108,12 +108,31 @@ public class ApiClient {
         return call;
     }
 
+
     public Call<Result<Boolean>> addRoomToHome(String homeId,  String roomId, Callback<Result<Boolean>> callback){
 
         Call<Result<Boolean>> call = this.service.addRoomToHome(homeId, roomId);
         call.enqueue(callback);
         return call;
     };
+
+    //--------------------------DEVICES-------------------------------------------
+
+
+    public Call<Result<Boolean>> addDeviceToRoom(String roomId,  String deviceId, Callback<Result<Boolean>> callback){
+
+        Call<Result<Boolean>> call = this.service.addDeviceToRoom(roomId, deviceId);
+        call.enqueue(callback);
+        return call;
+    };
+
+    public Call<Result<List<Device>>> getRoomDevices(String roomId, Callback<Result<List<Device>>> callback) {
+        Call<Result<List<Device>>> call = this.service.getRoomDevices(roomId);
+        call.enqueue(callback);
+        return call;
+    }
+
+
 
     //------------------------- LIGHTS ----------------------------------------
 

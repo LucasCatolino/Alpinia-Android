@@ -4,7 +4,7 @@ package com.example.Alpinia;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LampState extends State {
+public class LampState {
 
     @SerializedName("status")
     @Expose

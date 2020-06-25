@@ -53,6 +53,8 @@ public class FragmentHome extends Fragment {
     Button addRoomBttn;
     EditText newRoomName;
     private String homeId;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_home, container, false);
@@ -161,10 +163,6 @@ public class FragmentHome extends Fragment {
         });
     }
 
-    private void showResult(String result) {
-        String format = getResources().getString(R.string.result);
-        resultTextView.setText(String.format(format, result));
-    }
 
     private <T> void handleError(Response<T> response) {
         Error error = ApiClient.getInstance().getError(response.errorBody());
