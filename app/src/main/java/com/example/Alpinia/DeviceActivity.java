@@ -52,13 +52,12 @@ public class DeviceActivity extends AppCompatActivity {
         ApiClient.getInstance().getRoomDevices(roomId, new Callback<Result<List<Device>>>() {
             @Override
             public void onResponse(@NonNull Call<Result<List<Device>>> call, @NonNull Response<Result<List<Device>>> response) {
-                System.out.println("ENTRO EN GET ROOM DEVICES");
+
                 if (response.isSuccessful()) {
-                    System.out.println("EXITO");
+
                     Result<List<Device>> result = response.body();
                     devicesList = result.getResult();
-                    Toast.makeText(context,"holaaa",Toast.LENGTH_LONG);
-                    System.out.println(result.getResult().toString());
+
                     if(devicesList != null){
 
                         DeviceAdapter myAdapter = new DeviceAdapter(context,devicesList);

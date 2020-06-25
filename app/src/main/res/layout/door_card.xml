@@ -29,14 +29,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/refrigerator_mode"
-            android:textAlignment="textStart"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
+            android:text="@string/door_open"
+            android:textAlignment="textStart"
             android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-        <Spinner
+        <Switch
             android:id="@+id/open_close_door"
             android:layout_width="48dp"
             android:layout_height="match_parent"

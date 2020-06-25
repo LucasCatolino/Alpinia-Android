@@ -17,15 +17,9 @@ public class DoorState {
         return lock.equals("locked");
     }
 
-    public boolean isUnlocked() {
-        return lock.equals("unlocked");
-    }
-
     public boolean isOpen() {
         return status.equals("opened");
     }
 
-    public boolean isClose() {
-        return status.equals("closed");
-    }
+
 }

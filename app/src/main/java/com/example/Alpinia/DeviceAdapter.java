@@ -2,6 +2,8 @@ package com.example.Alpinia;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.DoorDialog;
 import com.example.Alpinia.API.objects.devices.Lamp;
 
 import java.util.List;
+import java.util.Map;
 
 public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
     Context context;
@@ -40,11 +44,13 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(devices.get(position).getType().getId().equals( "go46xmbqeomjrsjr")){
-                    System.out.println("FUNCA");
+                if(devices.get(position).getType().getId().equals( "lsf78ly0eqrjbz91")){
+                    Intent intent = new Intent(context, DoorDialog.class);
+                    intent.putExtra("deviceId",devices.get(position).getId());
+                    context.startActivity(intent);
                 }
                 else
-                    System.out.println("NO FUNCA");
+                    System.out.println("NO ES UNA PUERTA");
                 /*
                 Acá vamos a tener que ver de que tipo de device estamos hablando.
                 Intent intent = new Intent(context, XXXXX.class);
@@ -67,6 +73,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         public DeviceViewHolder(@NonNull View itemView) {
             super(itemView);
             //Mas complejo para que ponga la foto del device.
+
+            //Mapa para definir imagen que se ve. Hay que buscar todas las imagenes y meterlas en drawable.
             deviceIcon = itemView.findViewById(R.id.deviceImg);
             name = itemView.findViewById(R.id.tvDeviceName);
         }
