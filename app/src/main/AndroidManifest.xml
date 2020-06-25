@@ -18,11 +18,11 @@
             android:name="com.example.Alpinia.MainActivity"
             android:label="@string/app_name"
             android:parentActivityName="HomesActivity">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
         <activity android:name=".HomesActivity"
             android:label="@string/app_name">
@@ -34,20 +34,20 @@
         <activity android:name=".SettingsActivity"
             android:label="@string/overflow_settings"
             android:parentActivityName="HomesActivity">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
         <activity
             android:name="com.example.Alpinia.RoomActivity"
             android:label="@string/room_activity"
             android:parentActivityName="HomesActivity">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
 
     </application>
