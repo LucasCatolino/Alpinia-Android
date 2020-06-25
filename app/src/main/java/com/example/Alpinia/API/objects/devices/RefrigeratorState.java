@@ -1,10 +1,9 @@
 package com.example.Alpinia.API.objects.devices;
 
-import com.example.Alpinia.DeviceState;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RefrigeratorState extends DeviceState {
+public class RefrigeratorState {
 
     @SerializedName("freezerTemperature")
     @Expose
