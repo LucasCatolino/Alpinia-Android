@@ -123,4 +123,6 @@
     <!-- Manejo de errores -->
     <string name="error_message">Something went wrong: %1$s [%2$d]</string>
     <string name="room_activity">Room</string>
+    <string name="settings_IPAddress_active">Currently connected to: </string>
+    <string name="settings_IPAddress_button">Connect</string>
 </resources>

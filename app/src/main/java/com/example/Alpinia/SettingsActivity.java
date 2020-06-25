@@ -1,34 +1,34 @@
 package com.example.Alpinia;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 public class SettingsActivity extends AppCompatActivity {
     private Switch switchNotifications;
     EditText newIPAddress;
+    TextView textViewIP;
     private Button buttonApply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_settings);//refactor fragment a activity
+        setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         switchNotifications = (Switch) findViewById(R.id.switch1);
         newIPAddress = (EditText) findViewById(R.id.settings_IPAddress);
         buttonApply = (Button) findViewById(R.id.btnSaveChangesOnIP);
+        textViewIP = (TextView) findViewById((R.id.textViewIP));
+
+        textViewIP.setText(ApiClient.getInstance().getBaseURL());
 
         if (buttonApply != null) {
             buttonApply.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         private void changeIPAddress() {
             ApiClient.getInstance().setBaseURL(newIPAddress.getText().toString());
+            textViewIP.setText(ApiClient.getInstance().getBaseURL());
             Toast.makeText(getApplicationContext(), "IP Address: "+ ApiClient.getInstance().getBaseURL(), Toast.LENGTH_LONG).show();
-            //TODO
         }
 
 }
