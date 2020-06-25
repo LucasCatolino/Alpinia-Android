@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.Lamp;
 
 import java.util.List;
 
@@ -38,7 +40,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(devices.get(position).getType().getId().equals( "go46xmbqeomjrsjr")){
+                    System.out.println("FUNCA");
+                }
+                else
+                    System.out.println("NO FUNCA");
                 /*
                 Acá vamos a tener que ver de que tipo de device estamos hablando.
                 Intent intent = new Intent(context, XXXXX.class);
