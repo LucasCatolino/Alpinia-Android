@@ -65,21 +65,9 @@
     <string name="ac_vertical">Aspas Verticales</string>
     <string name="ac_horizontal">Aspas Horizontales</string>
     <string name="ac_speed">Porcentaje de Velocidad</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="doorDialog">Puerta</string>
+    <string name="SpeakerDialog">Parlante</string>
+    <string name="AirConditionerDialog">Aire acondicionado</string>
 
 
 </resources>

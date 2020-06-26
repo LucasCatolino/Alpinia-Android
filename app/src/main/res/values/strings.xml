@@ -198,23 +198,9 @@
     <string name="addButton">Add</string>
     <string name="newRoom">New room</string>
     <string name="toast_IPAddressMissing">Invalid IP address</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="doorDialog">Door</string>
+    <string name="SpeakerDialog">Speaker</string>
+    <string name="AirConditionerDialog">Air conditioner</string>
 
 
 </resources>

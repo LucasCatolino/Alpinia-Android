@@ -50,7 +50,7 @@
             </intent-filter-->
         </activity>
         <activity android:name=".API.objects.devices.DoorDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/doorDialog"
             android:parentActivityName=".DeviceActivity">
         </activity>
 
@@ -60,12 +60,12 @@
         </activity>
 
         <activity android:name=".API.objects.devices.SpeakerDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/SpeakerDialog"
             android:parentActivityName=".DeviceActivity">
         </activity>
 
         <activity android:name=".API.objects.devices.AirConditionerDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/AirConditionerDialog"
             android:parentActivityName=".DeviceActivity">
         </activity>
 
