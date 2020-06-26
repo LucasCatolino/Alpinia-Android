@@ -15,7 +15,7 @@ public class LightsState {
 
     @SerializedName("intensity")
     @Expose
-    private Integer intensity;
+    private int intensity;
 
     public String getStatus() {
         return status;
@@ -25,7 +25,7 @@ public class LightsState {
         return color;
     }
 
-    public Integer getIntensity() {
+    public int getIntensity() {
         return intensity;
     }
 

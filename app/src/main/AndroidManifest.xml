@@ -52,10 +52,11 @@
         <activity android:name=".API.objects.devices.DoorDialog"
             android:label="@string/overflow_settings"
             android:parentActivityName=".MainActivity">
-            <!--intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+        </activity>
+
+        <activity android:name=".API.objects.devices.LightsDialog"
+            android:label="@string/overflow_settings"
+            android:parentActivityName=".MainActivity">
         </activity>
 
     </application>

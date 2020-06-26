@@ -16,7 +16,6 @@ import com.example.Alpinia.API.ApiClient;
 import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.Error;
 
-import com.example.Alpinia.API.objects.devices.Lamp;
 import com.example.Alpinia.R;
 import com.example.Alpinia.API.objects.Result;
 
@@ -49,7 +48,7 @@ public class DashboardFragment extends Fragment {
 
     private void createDevice() {
         Toast.makeText(getContext(), "Creating Device", Toast.LENGTH_LONG).show();
-        lamp = new Lamp("lamparsaa");
+
 
         ApiClient.getInstance().addDevice(lamp, new Callback<Result<Device>>() {
             @Override

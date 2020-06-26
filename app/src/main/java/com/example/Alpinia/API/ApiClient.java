@@ -169,7 +169,7 @@ public class ApiClient {
         Integer [] aux = new Integer[1];
         aux[0] = newIntensity;
 
-        Call<Result<Integer>> call = this.service.setLightIntensity(deviceId, "setIntensity", aux);
+        Call<Result<Integer>> call = this.service.setLightIntensity(deviceId, "setBrightness", aux);
         call.enqueue(callback);
         return call;
     }

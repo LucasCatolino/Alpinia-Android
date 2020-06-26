@@ -3,23 +3,20 @@ package com.example.Alpinia;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
-import com.example.Alpinia.API.objects.devices.Lamp;
+import com.example.Alpinia.API.objects.devices.LightsDialog;
 
 import java.util.List;
-import java.util.Map;
 
 public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
     Context context;
@@ -46,6 +43,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
             public void onClick(View v) {
                 if(devices.get(position).getType().getId().equals( "lsf78ly0eqrjbz91")){
                     Intent intent = new Intent(context, DoorDialog.class);
+                    intent.putExtra("deviceId",devices.get(position).getId());
+                    intent.putExtra("deviceName",devices.get(position).getName());
+                    context.startActivity(intent);
+                }
+                if(devices.get(position).getType().getId().equals("go46xmbqeomjrsjr")){
+                    Intent intent = new Intent(context, LightsDialog.class);
                     intent.putExtra("deviceId",devices.get(position).getId());
                     intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);
