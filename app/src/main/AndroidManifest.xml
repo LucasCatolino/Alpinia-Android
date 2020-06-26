@@ -59,6 +59,11 @@
             android:parentActivityName=".MainActivity">
         </activity>
 
+        <activity android:name=".API.objects.devices.SpeakerDialog"
+            android:label="@string/overflow_settings"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
     </application>
 
 </manifest>

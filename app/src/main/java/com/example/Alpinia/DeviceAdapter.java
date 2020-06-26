@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
 import com.example.Alpinia.API.objects.devices.LightsDialog;
+import com.example.Alpinia.API.objects.devices.SpeakerDialog;
 
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                 }
                 if(devices.get(position).getType().getId().equals("go46xmbqeomjrsjr")){
                     Intent intent = new Intent(context, LightsDialog.class);
+                    intent.putExtra("deviceId",devices.get(position).getId());
+                    intent.putExtra("deviceName",devices.get(position).getName());
+                    context.startActivity(intent);
+                }
+                if(devices.get(position).getType().getId().equals("c89b94e8581855bc")){
+                    Intent intent = new Intent(context, SpeakerDialog.class);
                     intent.putExtra("deviceId",devices.get(position).getId());
                     intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);

@@ -2,8 +2,10 @@ package com.example.Alpinia.API.objects.devices;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class SpeakerDialog extends AppCompatActivity {
     ImageView playButton;
     TextView songDetails;
     TextView speakerName;
+    Switch onOffSwitch;
 
 
     @Override
@@ -47,7 +50,7 @@ public class SpeakerDialog extends AppCompatActivity {
 
         progressBar = (SeekBar) findViewById(R.id.progress_bar);
 
-
+        onOffSwitch = (Switch) findViewById(R.id.onoff_switch);
         playButton = (ImageView) findViewById(R.id.play_button);
         nextButton = (ImageView) findViewById(R.id.next_button);
         previousButton = (ImageView) findViewById(R.id.prev_button);
@@ -55,8 +58,207 @@ public class SpeakerDialog extends AppCompatActivity {
         speakerName = (TextView) findViewById(R.id.speaker_name);
 
         deviceId = getIntent().getStringExtra("deviceId");
-        deviceName = getIntent().getStringExtra("deviceName");
+        speakerName.setText( getIntent().getStringExtra("deviceName"));
 
+
+
+        volumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setVolume((Integer) progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                ;
+
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextSong();
+            }
+        });
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prevSong();
+            }
+        });
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(state.isPaused()){
+                    resume();
+                }
+                else if(state.isPlaying()){
+                    pause();
+                }
+            }
+        });
+        onOffSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(state.isStopped()){
+                    toggleButtons(true);
+                    play();
+                }
+                else{
+                    toggleButtons(false);
+                    stop();
+                }
+            }
+        });
+
+
+
+
+        updateState();
+    }
+
+
+    public void setVolume(int vol){
+        api.setSpeakerVol(deviceId,vol, new Callback<Result<Integer>>() {
+            @Override
+            public void onResponse(Call<Result<Integer>> call, Response<Result<Integer>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Integer>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void nextSong(){
+        api.nextSong(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void prevSong(){
+        api.previousSong(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void pause(){
+        api.pause(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void play(){
+        api.play(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void stop(){
+        api.stop(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void resume(){
+        api.resume(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else{
+                    handleError(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
     }
 
     public void updateState(){
@@ -67,9 +269,16 @@ public class SpeakerDialog extends AppCompatActivity {
                     Result<SpeakerState> result = response.body();
                     state = result.getResult();
 
-                    progressBar.setLeft(0);
-                    progressBar.setRight(getSeconds(state.getSong().getDuration()));
-                    progressBar.setProgress(getSeconds(state.getSong().getProgress()));
+                    onOffSwitch.setChecked(!state.isStopped());
+                    if(state.getSong() != null) {
+                        songDetails.setText(state.getSong().getTitle() + " by " + state.getSong().getArtist());
+                        progressBar.setLeft(0);
+                        progressBar.setRight(getSeconds(state.getSong().getDuration()));
+                        progressBar.setProgress(getSeconds(state.getSong().getProgress()));
+                    }
+                    else{
+                        progressBar.setProgress(0);
+                    }
 
                     volumeBar.setProgress(state.getVolume());
 
@@ -112,6 +321,17 @@ public class SpeakerDialog extends AppCompatActivity {
         int minute = Integer.parseInt(h1[0]);
         int second = Integer.parseInt(h1[1]);
         return (second + 60*minute);
+    }
+
+    private void toggleButtons(boolean enabled) {
+        volumeBar.setEnabled(enabled);
+        progressBar.setEnabled(enabled);
+        playButton.setEnabled(enabled);
+        nextButton.setEnabled(enabled);
+        previousButton.setEnabled(enabled);
+        if(!enabled){
+            songDetails.setText("");
+        }
     }
 
 }
