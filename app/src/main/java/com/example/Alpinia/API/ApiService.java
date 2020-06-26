@@ -155,36 +155,36 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     Call<Result<Integer>> setSpeakerVolume(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body Integer [] data);
 
-    @PUT("devices/{deviceId}/play")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> play(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> play(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/stop")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> stop(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> stop(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/pause")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> pause(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> pause(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/resume")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> resume(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> resume(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/nextSong")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> nextSong(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> nextSong(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/previousSong")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<Boolean>> previousSong(@Path("deviceId") String deviceId);
+    Call<Result<Boolean>> previousSong(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
-    @PUT("devices/{deviceId}/setGenre/{genreName}")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<String>> setGenre(@Path("deviceId") String deviceId,@Path("genreName")String genre);
+    Call<Result<String>> setGenre(@Path("deviceId") String deviceId,@Path("actionName") String actionName,@Body String [] data);
 
-    @PUT("devices/{deviceId}/getPlayList")
+    @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
-    Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId);
+    Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
 
 }

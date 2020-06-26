@@ -16,7 +16,8 @@ public class SpeakerState {
     @Expose
     private String genre;
 
-    List<Song> playlist;
+    @SerializedName("song")
+    private Song song;
 
     public String getStatus() {
         return status;
@@ -37,16 +38,27 @@ public class SpeakerState {
     public String getGenre() {
         return genre;
     }
-
     public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    public List<Song> getPlaylist() {
-        return playlist;
+
+
+    public boolean isPlaying(){
+        return status.equals("playing");
+    }
+    public boolean isStopped(){
+        return status.equals("stopped");
+    }
+    public boolean isPaused(){
+        return status.equals("paused");
     }
 
-    public void setPlaylist(List<Song> playlist) {
-        this.playlist = playlist;
+    public Song getSong() {
+        return song;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
     }
 }

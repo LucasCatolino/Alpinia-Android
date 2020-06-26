@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Song {
-    @SerializedName("song")
+    @SerializedName("title")
     @Expose
-    String song;
+    String title;
 
     @SerializedName("artist")
     @Expose
@@ -20,4 +20,26 @@ public class Song {
     @Expose
     String duration;
 
+    @SerializedName("progress")
+    String progress;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
 }

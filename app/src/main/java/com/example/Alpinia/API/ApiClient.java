@@ -292,7 +292,7 @@ public class ApiClient {
 
     //---------------------SPEAKER-------------------------
 
-    Call<Result<SpeakerState>> getSpeakerState( String deviceId, Callback<Result<SpeakerState>> callback){
+    public Call<Result<SpeakerState>> getSpeakerState( String deviceId, Callback<Result<SpeakerState>> callback){
         Call<Result<SpeakerState>> call = this.service.getSpeakerState(deviceId);
         call.enqueue(callback);
         return call;
@@ -307,49 +307,51 @@ public class ApiClient {
         return call;
     }
 
-    Call<Result<Boolean>> play(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.play(deviceId);
+    public Call<Result<Boolean>> play(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.play(deviceId,"play");
         call.enqueue(callback);
         return call;
     }
 
-    Call<Result<Boolean>> stop(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.stop(deviceId);
+    public Call<Result<Boolean>> stop(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.stop(deviceId,"stop");
         call.enqueue(callback);
         return call;
     }
 
-    Call<Result<Boolean>> pause(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.pause(deviceId);
+    public Call<Result<Boolean>> pause(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.pause(deviceId,"pause");
         call.enqueue(callback);
         return call;
     }
-    Call<Result<Boolean>> resume(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.resume(deviceId);
-        call.enqueue(callback);
-        return call;
-    }
-
-    Call<Result<Boolean>> nextSong(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.nextSong(deviceId);
+    public Call<Result<Boolean>> resume(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.resume(deviceId,"resume");
         call.enqueue(callback);
         return call;
     }
 
-    Call<Result<Boolean>> previousSong(String deviceId,Callback<Result<Boolean>> callback){
-        Call<Result<Boolean>> call = this.service.previousSong(deviceId);
+    public Call<Result<Boolean>> nextSong(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.nextSong(deviceId,"nextSong");
         call.enqueue(callback);
         return call;
     }
 
-    Call<Result<String>> setGenre( String deviceId,String genre, Callback<Result<String>> callback){
-        Call<Result<String>> call = this.service.setGenre(deviceId, genre);
+    public Call<Result<Boolean>> previousSong(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.previousSong(deviceId,"previousSong");
         call.enqueue(callback);
         return call;
     }
 
-    Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,Callback<Result<List<Song>>> callback){
-        Call<Result<List<Song>>> call = this.service.getPlaylist(deviceId);
+    public Call<Result<String>> setGenre( String deviceId,String genre, Callback<Result<String>> callback){
+        String [] aux = new String[1];
+        aux[0] = genre;
+        Call<Result<String>> call = this.service.setGenre(deviceId, "setGenre", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,Callback<Result<List<Song>>> callback){
+        Call<Result<List<Song>>> call = this.service.getPlaylist(deviceId,"getPlaylist");
         call.enqueue(callback);
         return call;
     }
