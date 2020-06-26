@@ -68,12 +68,12 @@ public class HomesActivity extends AppCompatActivity {
         int id= item.getItemId();
         if (id== R.id.overflow_refresh) {
             updateView();
-            Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.toast_Refresh, Toast.LENGTH_SHORT).show();
         } else if (id== R.id.overflow_settings) {
             Intent i= new Intent(this, SettingsActivity.class);
             startActivity(i);
 
-            Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.toast_Settings, Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -109,7 +109,7 @@ public class HomesActivity extends AppCompatActivity {
     }
 
     private void createHome() {
-        Toast.makeText(this, "Creating Home", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.toast_createHome, Toast.LENGTH_LONG).show();
         Home home = new Home(newHomeName.getText().toString());
         ApiClient.getInstance().addHome(home, new Callback<Result<Home>>() {
             @Override
@@ -143,7 +143,7 @@ public class HomesActivity extends AppCompatActivity {
         String LOG_TAG = "App";
         Log.e(LOG_TAG, t.toString());
         if ((t.toString().contains("connect")) || (t.toString().contains("Unable to resolve host"))){
-            Toast.makeText(getApplicationContext(), "Connection problems", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.toast_ConnectionProblems, Toast.LENGTH_SHORT).show();
         }
     }
 }

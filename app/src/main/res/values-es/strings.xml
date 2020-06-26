@@ -45,6 +45,17 @@
     <string name="no_results">No tiene casas</string>
     <string name="error_message">Algo salió mal: %1$s [%2$d]</string>
     <string name="room_activity">Habitación</string>
-    <string name="settings_IPAddress_active">"Conectado a: "</string>
+    <string name="settings_IPAddress_active">Conectado a:</string>
     <string name="settings_IPAddress_button">Conectar</string>
+    <string name="toast_createRoom">Creando habitación</string>
+    <string name="toast_Refresh">Actualizando</string>
+    <string name="toast_Settings">Configuraciones</string>
+    <string name="toast_IPAddress">Cambiando dirección IP</string>
+    <string name="toast_createHome">Creando casa</string>
+    <string name="toast_ConnectionProblems">Problemas de conexión</string>
+    <string name="title_dashboard">Rutinas</string>
+    <string name="newHome">Nueva casa</string>
+    <string name="addButton">Agregar</string>
+    <string name="newRoom">Nueva habitación</string>
+    <string name="toast_IPAddressMissing">Dirección IP inválida</string>
 </resources>

@@ -19,7 +19,7 @@
         android:id="@+id/newHome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="New home"
+        android:hint="@string/newHome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAddHome"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,7 +28,7 @@
         android:id="@+id/btnAddHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/addButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

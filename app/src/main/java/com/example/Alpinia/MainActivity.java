@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.Alpinia.API.objects.Room;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_routines, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         int id= item.getItemId();
         if (id== R.id.overflow_refresh) {
 
-            Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.toast_Refresh, Toast.LENGTH_SHORT).show();
         } else if (id== R.id.overflow_settings) {
             Intent i= new Intent(this, SettingsActivity.class);
             startActivity(i);
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             transition.replace(R.id.nav_host_fragment, fragmentSettings);
             transition.commit();
 */
-            Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.toast_Settings, Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

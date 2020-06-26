@@ -93,7 +93,7 @@ public class FragmentRooms extends Fragment {
     }
 
     private void createRoom() {
-        Toast.makeText(getContext(), "Creating Room", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.toast_createRoom, Toast.LENGTH_LONG).show();
 
         room = new Room(newRoomName.getText().toString(), new RoomMeta("9m2"));
         ApiClient.getInstance().addRoom(room, new Callback<Result<Room>>() {

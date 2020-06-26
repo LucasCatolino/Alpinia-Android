@@ -1,6 +1,7 @@
 package com.example.Alpinia;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Alpinia.API.ApiClient;
+
+import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
     private Switch switchNotifications;
@@ -31,6 +34,15 @@ public class SettingsActivity extends AppCompatActivity {
         textViewIP = (TextView) findViewById((R.id.textViewIP));
 
         textViewIP.setText(ApiClient.getInstance().getBaseURL());
+
+        if(newIPAddress != null) {
+            newIPAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonApply.setClickable(true);
+                }
+            });
+        }
 
         if (buttonApply != null) {
             buttonApply.setOnClickListener(new View.OnClickListener() {
@@ -59,9 +71,40 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         private void changeIPAddress() {
-            ApiClient.getInstance().setBaseURL(newIPAddress.getText().toString());
-            textViewIP.setText(ApiClient.getInstance().getBaseURL());
-            Toast.makeText(getApplicationContext(), "IP Address: "+ ApiClient.getInstance().getBaseURL(), Toast.LENGTH_LONG).show();
+            if (validateIP(newIPAddress.getText().toString())) {
+                ApiClient.getInstance().setBaseURL(newIPAddress.getText().toString());
+                textViewIP.setText(ApiClient.getInstance().getBaseURL());
+                Toast.makeText(getApplicationContext(), R.string.toast_IPAddress, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.toast_IPAddressMissing, Toast.LENGTH_LONG).show();
+            }
         }
+
+    private boolean validateIP(String IPAddress) {
+        try {
+            if ( IPAddress == null || IPAddress.isEmpty() ) {
+                return false;
+            }
+
+            String[] parts = IPAddress.split( "\\." );
+            if ( parts.length != 4 ) {
+                return false;
+            }
+
+            for ( String s : parts ) {
+                int i = Integer.parseInt( s );
+                if ( (i < 0) || (i > 255) ) {
+                    return false;
+                }
+            }
+            if ( IPAddress.endsWith(".") ) {
+                return false;
+            }
+
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 
 }
