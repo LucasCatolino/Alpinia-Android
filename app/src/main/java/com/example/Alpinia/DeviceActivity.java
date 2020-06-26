@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class DeviceActivity extends AppCompatActivity {
     List<Device> devicesList;
     Context context;
-    String roomId;
+    private static String roomId; //agrego private static
     RecyclerView recyclerView;
 
     @Override
@@ -36,10 +36,11 @@ public class DeviceActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_devices);
 
         context = this;
-        if(getIntent().hasExtra("roomId"))
+        if(getIntent().hasExtra("roomId")) {
             roomId = getIntent().getExtras().get("roomId").toString();
-        else
-            roomId = null;
+        }
+//        else
+//            roomId = null;
 
         getRoomDevices();
 

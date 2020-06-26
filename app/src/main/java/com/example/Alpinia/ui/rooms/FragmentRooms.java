@@ -50,7 +50,7 @@ public class FragmentRooms extends Fragment {
     Context context;
     Button addRoomBttn;
     EditText newRoomName;
-    private String homeId;
+    private static String homeId;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,7 +60,9 @@ public class FragmentRooms extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
 
-        homeId = activity.getHomeId();
+        if (activity.getHomeId()!= null){
+            this.homeId = activity.getHomeId();
+        }
 
         addRoomBttn = (Button) vista.findViewById(R.id.btnAddRoom);
         newRoomName = (EditText) vista.findViewById(R.id.newRoom);

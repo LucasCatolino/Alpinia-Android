@@ -51,22 +51,22 @@
         </activity>
         <activity android:name=".API.objects.devices.DoorDialog"
             android:label="@string/overflow_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DeviceActivity">
         </activity>
 
         <activity android:name=".API.objects.devices.RefrigeratorDialog"
             android:label="@string/overflow_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DeviceActivity">
         </activity>
 
         <activity android:name=".API.objects.devices.SpeakerDialog"
             android:label="@string/overflow_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DeviceActivity">
         </activity>
 
         <activity android:name=".API.objects.devices.AirConditionerDialog"
             android:label="@string/overflow_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DeviceActivity">
         </activity>
 
     </application>
