@@ -6,6 +6,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Alpinia.API.ApiClient;
@@ -28,6 +29,7 @@ public class DoorDialog extends AppCompatActivity {
     private ApiClient api;
     private String deviceId;
     private Switch switchOpenClose, switchLockUnlock;
+    TextView doorName;
 
     DoorState myState;
 
@@ -39,6 +41,8 @@ public class DoorDialog extends AppCompatActivity {
         deviceId = getIntent().getStringExtra("deviceId");
 
         api = ApiClient.getInstance();
+        doorName = findViewById(R.id.door_name);
+        doorName.setText(getIntent().getStringExtra("deviceName"));
         switchOpenClose = findViewById(R.id.open_close_door);
         switchLockUnlock = findViewById(R.id.lock_unlock_switch);
 
@@ -79,13 +83,11 @@ public class DoorDialog extends AppCompatActivity {
                     myState = result.getResult();
                     switchOpenClose.setChecked(myState.isOpen());
                     switchLockUnlock.setChecked(myState.isLocked());
-                    
+
                     switchOpenClose.setEnabled(!myState.isLocked());
                     switchLockUnlock.setEnabled(!myState.isOpen());
-                    System.out.println("LLEGUE ACÁ" + myState.toString());
                 }
                 else{
-                    System.out.println("ERROR");
                     handleError(response);
                 }
 

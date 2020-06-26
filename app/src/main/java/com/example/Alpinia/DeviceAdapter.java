@@ -47,6 +47,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                 if(devices.get(position).getType().getId().equals( "lsf78ly0eqrjbz91")){
                     Intent intent = new Intent(context, DoorDialog.class);
                     intent.putExtra("deviceId",devices.get(position).getId());
+                    intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);
                 }
                 else
