@@ -38,6 +38,8 @@ public class SpeakerDialog extends AppCompatActivity {
     TextView speakerName;
     Switch onOffSwitch;
 
+    ProgressThread progressThread;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -248,6 +250,8 @@ public class SpeakerDialog extends AppCompatActivity {
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if(response.isSuccessful()){
                     updateState();
+                    progressThread = new ProgressThread(getSeconds(state.getSong().getDuration())-getSeconds(state.getSong().getProgress()));
+                    progressThread.start();
                 }
                 else{
                     handleError(response);
@@ -331,6 +335,24 @@ public class SpeakerDialog extends AppCompatActivity {
         previousButton.setEnabled(enabled);
         if(!enabled){
             songDetails.setText("");
+        }
+    }
+
+    public class ProgressThread extends Thread{
+        int seconds;
+        ProgressThread(int secs){
+            seconds = secs;
+        }
+        @Override
+        public void run(){
+            for(int i = 0; i<seconds; i++){
+                try {
+                    Thread.sleep(1000);
+                    updateState();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

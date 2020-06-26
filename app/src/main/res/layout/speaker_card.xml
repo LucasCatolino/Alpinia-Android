@@ -89,14 +89,16 @@
         android:layout_height="wrap_content"
         android:text="Volume"
         app:layout_constraintBottom_toTopOf="@+id/volume_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar"
-        app:layout_constraintVertical_bias="0.838"
-        tools:layout_editor_absoluteX="181dp" />
+        app:layout_constraintVertical_bias="0.838" />
 
     <Switch
         android:id="@+id/onoff_switch"
         android:layout_width="54dp"
         android:layout_height="29dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
