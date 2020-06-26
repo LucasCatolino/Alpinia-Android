@@ -8,6 +8,8 @@ import com.example.Alpinia.API.objects.devices.LightsState;
 import com.example.Alpinia.API.objects.devices.RefrigeratorState;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
+import com.example.Alpinia.API.objects.devices.Song;
+import com.example.Alpinia.API.objects.devices.SpeakerState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +146,45 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     Call<Result<Integer>> setFreezerTemp(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body Integer [] data);
 
+    //---------------------SPEAKERS--------------------------------------------
 
+    @GET("devices/{deviceId}/state")
+    Call<Result<SpeakerState>> getSpeakerState(@Path("deviceId") String deviceId);
 
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Integer>> setSpeakerVolume(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body Integer [] data);
+
+    @PUT("devices/{deviceId}/play")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> play(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/stop")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> stop(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/pause")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> pause(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/resume")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> resume(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/nextSong")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> nextSong(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/previousSong")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> previousSong(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/setGenre/{genreName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<String>> setGenre(@Path("deviceId") String deviceId,@Path("genreName")String genre);
+
+    @PUT("devices/{deviceId}/getPlayList")
+    @Headers("Content-Type: application/json")
+    Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId);
 
 }

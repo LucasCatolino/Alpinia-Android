@@ -13,7 +13,4 @@ public class FaucetState {
         return status.equals("opened");
     }
 
-    public boolean isClosed() {
-        return status.equals("closed");
-    }
 }

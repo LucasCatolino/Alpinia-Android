@@ -10,6 +10,8 @@ import com.example.Alpinia.API.objects.devices.LightsState;
 import com.example.Alpinia.API.objects.devices.RefrigeratorState;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
+import com.example.Alpinia.API.objects.devices.Song;
+import com.example.Alpinia.API.objects.devices.SpeakerState;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -22,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Path;
 
 public class ApiClient {
     private Retrofit retrofit = null;
@@ -287,9 +290,69 @@ public class ApiClient {
         return call;
     }
 
+    //---------------------SPEAKER-------------------------
 
+    Call<Result<SpeakerState>> getSpeakerState( String deviceId, Callback<Result<SpeakerState>> callback){
+        Call<Result<SpeakerState>> call = this.service.getSpeakerState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
 
+    public Call<Result<Integer>> setSpeakerVol(String deviceId, Integer newVol, Callback<Result<Integer>> callback) {
+        Integer [] aux = new Integer[1];
+        aux[0] = newVol;
 
+        Call<Result<Integer>> call = this.service.setFridgeTemp(deviceId, "setVolume", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<Boolean>> play(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.play(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<Boolean>> stop(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.stop(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<Boolean>> pause(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.pause(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+    Call<Result<Boolean>> resume(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.resume(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<Boolean>> nextSong(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.nextSong(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<Boolean>> previousSong(String deviceId,Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.previousSong(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<String>> setGenre( String deviceId,String genre, Callback<Result<String>> callback){
+        Call<Result<String>> call = this.service.setGenre(deviceId, genre);
+        call.enqueue(callback);
+        return call;
+    }
+
+    Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,Callback<Result<List<Song>>> callback){
+        Call<Result<List<Song>>> call = this.service.getPlaylist(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
 
 
 
