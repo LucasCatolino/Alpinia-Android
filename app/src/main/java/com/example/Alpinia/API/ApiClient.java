@@ -1,6 +1,7 @@
 package com.example.Alpinia.API;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.AirConditionerState;
 import com.example.Alpinia.API.objects.devices.DoorState;
 import com.example.Alpinia.API.objects.Error;
 import com.example.Alpinia.API.objects.ErrorResult;
@@ -355,6 +356,78 @@ public class ApiClient {
         call.enqueue(callback);
         return call;
     }
+
+
+    //---------------------AIR CONDITIONER-------------------------
+
+    public Call<Result<AirConditionerState>> getAirConditionerState(String deviceId, Callback<Result<AirConditionerState>> callback) {
+        Call<Result<AirConditionerState>> call = this.service.getAirConditionerState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> changeAirConditionerMode(String deviceId, String newMode, Callback<Result<Boolean>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newMode;
+
+        Call<Result<Boolean>> call = this.service.changeAirConditionerMode(deviceId, "setMode", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Integer>> setAcTemp(String deviceId, Integer newTemp, Callback<Result<Integer>> callback) {
+        Integer [] aux = new Integer[1];
+        aux[0] = newTemp;
+
+        Call<Result<Integer>> call = this.service.setAcTemp(deviceId, "setTemperature", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+       public Call<Result<Boolean>> setVerticalSwing(String deviceId, String newTemp, Callback<Result<Boolean>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newTemp;
+
+        Call<Result<Boolean>> call = this.service.setVerticalSwing(deviceId, "setVerticalSwing", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> setHorizontalSwing(String deviceId, String newTemp, Callback<Result<Boolean>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newTemp;
+
+        Call<Result<Boolean>> call = this.service.setHorizontalSwing(deviceId, "setHorizontalSwing", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> setFanSpeed(String deviceId, String newTemp, Callback<Result<Boolean>> callback) {
+        String [] aux = new String[1];
+        aux[0] = newTemp;
+
+        Call<Result<Boolean>> call = this.service.setFanSpeed(deviceId, "setFanSpeed", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> openAc(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "open");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> closeAc(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "close");
+        call.enqueue(callback);
+        return call;
+    }
+
+
+
+
+
+
 
 
 

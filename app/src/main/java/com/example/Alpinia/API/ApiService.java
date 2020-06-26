@@ -1,6 +1,8 @@
 package com.example.Alpinia.API;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.AirConditioner;
+import com.example.Alpinia.API.objects.devices.AirConditionerState;
 import com.example.Alpinia.API.objects.devices.DoorState;
 import com.example.Alpinia.API.objects.devices.FaucetState;
 import com.example.Alpinia.API.objects.Home;
@@ -186,5 +188,35 @@ public interface ApiService {
     @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
     Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
+
+
+    //---------------------AIR CONDITIONER-------------------------
+
+    @GET("devices/{deviceId}/state")
+    Call<Result<AirConditionerState>> getAirConditionerState(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> changeAirConditionerMode(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Integer>> setAcTemp(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body Integer [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> setVerticalSwing(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> setHorizontalSwing(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> setFanSpeed(@Path("deviceId") String deviceId, @Path("actionName") String actionName, @Body String [] data);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> executeActionOnAc(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
 
 }

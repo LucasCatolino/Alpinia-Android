@@ -116,6 +116,69 @@
     </string-array>
 
 
+    <!-- Aire Acondicionado -->
+    <string name="ac_title">Air Conditioner</string>
+    <string name="ac_mode">Mode</string>
+    <string-array name="ac_mode_options">
+        <item>Ventilation</item>
+        <item>Cold</item>
+        <item>Hot</item>
+    </string-array>
+
+    <string name="ac_temperature">Temperature</string>
+    <string-array name="ac_temperature_options">
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+    </string-array>
+
+    <string name="ac_vertical">Vertical Blade</string>
+    <string-array name="ac_vertical_options">
+         <item>Default</item>
+        <item>22</item>
+        <item>45</item>
+        <item>67</item>
+        <item>90</item>
+    </string-array>
+
+    <string name="ac_horizontal">Horizontal Blade</string>
+    <string-array name="ac_horizontal_options">
+        <item>Default</item>
+        <item>-90</item>
+        <item>-45</item>
+        <item>0</item>
+        <item>45</item>
+        <item>90</item>
+    </string-array>
+
+    <string name="ac_speed">Speed Percentage</string>
+    <string-array name="ac_speed">
+       <item>Default</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+    </string-array>
+
+
 
 
     <string name="no_results">You don\'t have any homes</string>
@@ -135,4 +198,23 @@
     <string name="addButton">Add</string>
     <string name="newRoom">New room</string>
     <string name="toast_IPAddressMissing">Invalid IP address</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

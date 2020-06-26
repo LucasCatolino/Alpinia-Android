@@ -1,14 +1,14 @@
 package com.example.Alpinia.API.objects.devices;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Alpinia.API.ApiClient;
 import com.example.Alpinia.API.objects.Result;
@@ -18,31 +18,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RefrigeratorDialog extends Fragment {
-
-    private String deviceId;
-    private Spinner spinMode, spinFridge, spinFreezer;
+public class RefrigeratorDialog extends AppCompatActivity {
+    // creo las variables con las que voy a trabajar
+    Context context;
     private ApiClient api;
+    private String deviceId;
+    private Spinner spinMode;
+    private Spinner spinFridge;
+    private Spinner spinFreezer;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.refrigerator_card, container, false);
-    }
 
+    // sobreescribo el onCreate para relacionarlo con el layout del refrigerator
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        readBundle(getArguments());
-
-        init(view);
-    }
-
-    private void init(@NonNull View view) {
-        spinMode = view.findViewById(R.id.ref_mode);
-        spinFridge = view.findViewById(R.id.ref_fridge_temp);
-        spinFreezer = view.findViewById(R.id.ref_freezer_temp);
-
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        context = (Context) this;
+        setContentView(R.layout.refrigerator_card);
+        // instancio la API
         api = ApiClient.getInstance();
+        deviceId = getIntent().getStringExtra("deviceId");
+        // hago que las variables creadas referencian a los botones del layout
+        spinMode = findViewById(R.id.ref_mode);
+        spinFridge = findViewById(R.id.ref_fridge_temp);
+        spinFreezer = findViewById(R.id.ref_freezer_temp);
 
+        // obtengo el estado de la heladera
         api.getRefrigeratorState(deviceId, new Callback<Result<RefrigeratorState>>() {
             @Override
             public void onResponse(@NonNull Call<Result<RefrigeratorState>> call, @NonNull Response<Result<RefrigeratorState>> response) {
@@ -50,25 +50,25 @@ public class RefrigeratorDialog extends Fragment {
                     Result<RefrigeratorState> result = response.body();
                     if(result != null) {
                         RefrigeratorState refrigeratorState = result.getResult();
-                        Integer freezerTemp = refrigeratorState.getFreezerTemperature();
-                        int freezerTempIndex = getIndex(spinFreezer, freezerTemp.toString());
-                        Integer fridgeTemp = refrigeratorState.getTemperature();
-                        int fridgeTempIndex = getIndex(spinFridge, fridgeTemp.toString());
-                        spinFreezer.setSelection(freezerTempIndex);
-                        spinFridge.setSelection(fridgeTempIndex);
-
-
-                        String aux = refrigeratorState.getMode();
-                        switch (aux) {
-                            case "default":
-                                spinMode.setSelection(0);
-                                break;
-                            case "vacation":
-                                spinMode.setSelection(1);
-                                break;
-                            case "party":
-                                spinMode.setSelection(2);
-                                break;
+                        // freezer_aux = tempratura actual del freezer (en la API)
+                        Integer freezer_aux = refrigeratorState.getFreezerTemperature();
+                        // freezer_aux2 = índice de la tempratura en la que está el freezer (que índice en el arreglo ocupa) -> estamos trabajando con Spinners
+                        // le paso la temperatura y me devuelve el índice que ocupa en el arreglo -> función getIndex
+                        int freezer_aux2 = getIndex(spinFreezer, freezer_aux.toString());
+                        // mismo procedimiento con la heladera
+                        Integer fridge_aux = refrigeratorState.getTemperature();
+                        int fridge_aux2 = getIndex(spinFridge, fridge_aux.toString());
+                        // en la interfaz selecciono el índice que me devuelve la función
+                        spinFreezer.setSelection(freezer_aux2);
+                        spinFridge.setSelection(fridge_aux2);
+                        // la API me devuelve el modo en el que está la heladera e itero sobre las 3 opciones posibles para seleccionar el índice adecuado
+                        String mode_aux = refrigeratorState.getMode();
+                        if(mode_aux.equals("default")){
+                            spinMode.setSelection(0);
+                        } else if(mode_aux.equals("vacation")){
+                            spinMode.setSelection(1);
+                        } else if(mode_aux.equals("party")){
+                            spinMode.setSelection(2);
                         }
 
                     } else {
@@ -85,6 +85,9 @@ public class RefrigeratorDialog extends Fragment {
             }
         });
 
+
+
+        // invoca a la función changeMode() cuando se selecciona un ítem del spinner de mode
         spinMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -92,10 +95,11 @@ public class RefrigeratorDialog extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                // no se selecciono ninguna opción -> no hace nada
             }
         });
 
+        // invoca a la función changeFridgeTemp() cuando se selecciona un ítem del spinner del fridge
         spinFridge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -103,10 +107,11 @@ public class RefrigeratorDialog extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                // no se selecciono ninguna opción -> no hace nada
             }
         });
 
+        // invoca a la función changeFreezerTemp() cuando se selecciona un ítem del spinner del freezer
         spinFreezer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -114,27 +119,14 @@ public class RefrigeratorDialog extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                // no se selecciono ninguna opción -> no hace nada
             }
         });
+
     }
 
-    private void readBundle(Bundle bundle) {
-        if (bundle != null) {
-            deviceId = bundle.getString("deviceId");
-        }
-    }
+    // CERRAMOS EL ON.CREATE, ARRANCAMOS CON LAS FUNCIONES QUE SE IMPLEMENTAN AL TOCAR LOS BOTONES
 
-    @NonNull
-    public static RefrigeratorDialog newInstance(String deviceId) {
-        Bundle bundle = new Bundle();
-        bundle.putString("deviceId", deviceId);
-
-        RefrigeratorDialog fragment = new RefrigeratorDialog();
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
 
     private void changeMode() {
         api.changeRefrigeratorMode(deviceId, spinMode.getSelectedItem().toString().toLowerCase(), new Callback<Result<Boolean>>() {
@@ -143,7 +135,7 @@ public class RefrigeratorDialog extends Fragment {
                 if(response.isSuccessful()) {
                     Result<Boolean> result = response.body();
                     if(result != null) {
-                        updateSpinners();
+                        updateStateOnce();
                     } else {
                         //manejo de error
                     }
@@ -166,7 +158,7 @@ public class RefrigeratorDialog extends Fragment {
                 if(response.isSuccessful()) {
                     Result<Integer> result = response.body();
                     if(result != null) {
-                        updateSpinners();
+                        updateStateOnce();
                     } else {
                         //manejo de error
                     }
@@ -189,7 +181,7 @@ public class RefrigeratorDialog extends Fragment {
                 if(response.isSuccessful()) {
                     Result<Integer> result = response.body();
                     if(result != null) {
-                        updateSpinners();
+                        updateStateOnce();
                     } else {
                         //manejo de error
                     }
@@ -214,7 +206,7 @@ public class RefrigeratorDialog extends Fragment {
         return -1;
     }
 
-    private void updateSpinners() {
+    private void updateStateOnce() {
         api.getRefrigeratorState(deviceId, new Callback<Result<RefrigeratorState>>() {
             @Override
             public void onResponse(@NonNull Call<Result<RefrigeratorState>> call, @NonNull Response<Result<RefrigeratorState>> response) {
@@ -242,18 +234,19 @@ public class RefrigeratorDialog extends Fragment {
                         }
 
                     } else {
-                        //manejo de error
+                        //  ErrorHandler.handleError(response, requireView(), getString(R.string.error_1_string));
                     }
                 } else {
-                    //manejo de error
+                  //  ErrorHandler.handleError(response, requireView(), getString(R.string.error_1_string));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Result<RefrigeratorState>> call, @NonNull Throwable t) {
-                //manejo de error
+              //  ErrorHandler.handleUnexpectedError(t, requireView(), RefrigeratorControllerFragment.this);
             }
         });
     }
+
 }
 

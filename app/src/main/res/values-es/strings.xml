@@ -58,4 +58,28 @@
     <string name="addButton">Agregar</string>
     <string name="newRoom">Nueva habitación</string>
     <string name="toast_IPAddressMissing">Dirección IP inválida</string>
+
+    <string name="ac_title">Aire Acondicionado</string>
+    <string name="ac_mode">Modo</string>
+    <string name="ac_temperature">Temperatura</string>
+    <string name="ac_vertical">Aspas Verticales</string>
+    <string name="ac_horizontal">Aspas Horizontales</string>
+    <string name="ac_speed">Porcentaje de Velocidad</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

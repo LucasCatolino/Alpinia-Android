@@ -13,8 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.devices.AirConditioner;
+import com.example.Alpinia.API.objects.devices.AirConditionerDialog;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
-import com.example.Alpinia.API.objects.devices.LightsDialog;
+import com.example.Alpinia.API.objects.devices.RefrigeratorDialog;
 import com.example.Alpinia.API.objects.devices.SpeakerDialog;
 
 import java.util.List;
@@ -48,8 +50,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                     intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);
                 }
-                if(devices.get(position).getType().getId().equals("go46xmbqeomjrsjr")){
-                    Intent intent = new Intent(context, LightsDialog.class);
+                if(devices.get(position).getType().getId().equals("rnizejqr2di0okho")){
+                    Intent intent = new Intent(context, RefrigeratorDialog.class);
                     intent.putExtra("deviceId",devices.get(position).getId());
                     intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);
@@ -60,6 +62,17 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                     intent.putExtra("deviceName",devices.get(position).getName());
                     context.startActivity(intent);
                 }
+                if(devices.get(position).getType().getId().equals("li6cbv5sdlatti0j")){
+                    Intent intent = new Intent(context, AirConditionerDialog.class);
+                    intent.putExtra("deviceId",devices.get(position).getId());
+                    intent.putExtra("deviceName",devices.get(position).getName());
+                    context.startActivity(intent);
+                }
+
+
+
+
+
                 else
                     System.out.println("NO ES UNA PUERTA");
                 /*
