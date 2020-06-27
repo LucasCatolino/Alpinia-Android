@@ -1,6 +1,7 @@
 package com.example.Alpinia.API;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.Routine;
 import com.example.Alpinia.API.objects.devices.AirConditioner;
 import com.example.Alpinia.API.objects.devices.AirConditionerState;
 import com.example.Alpinia.API.objects.devices.DoorState;
@@ -28,7 +29,8 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    // HOMES
+    //--------------------------- HOMES -----------------------------
+
     @POST("homes")
     @Headers("Content-Type: application/json")
     Call<Result<Home>> addHome(@Body Home home);
@@ -46,7 +48,10 @@ public interface ApiService {
     @GET("homes")
     Call<Result<List<Home>>> getHomes();
 
-    //ROOMS
+
+
+    //--------------------------- ROOMS -----------------------------
+
     @POST("rooms")
     @Headers("Content-Type: application/json")
     Call<Result<Room>> addRoom(@Body Room room);
@@ -71,7 +76,10 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     Call<Result<Boolean>> addRoomToHome(@Path("homeId")String homeId,@Path("roomId") String roomId);
 
-    //DEVICES
+
+
+    //--------------------------- DEVICES -----------------------------
+
     @POST("devices")
     @Headers("Content-Type: application/json")
     Call<Result<Device>> addDevice(@Body Device device);
@@ -83,6 +91,31 @@ public interface ApiService {
     @POST("rooms/{roomId}/devices/{deviceId}")
     @Headers("Content-Type: application/json")
     Call<Result<Boolean>> addDeviceToRoom(@Path("roomId")String roomId,@Path("deviceId") String deviceId);
+
+
+
+    //--------------------------- ROUTINES -----------------------------
+
+    @GET("routines")
+    Call<Result<List<Routine>>> getRoutines();
+
+    @POST("routines")
+    @Headers("Content-Type: application/json")
+    Call<Result<Routine>> addRoutine(@Body Routine routine);
+
+    @DELETE("routines/{routineId}")
+    Call<Result<Boolean>> deleteRoutine(@Path("routineId") String routineId);
+
+    @GET("routines/{routineId}")
+    Call<Result<Routine>> getRoutine(@Path("routineId") String routineId);
+
+    @PUT("routines/{routineId}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> modifyRoutine(@Path("routineId") String routineId, @Body Routine routine);
+
+    @PUT("routines/{routineId}/execute")
+    @Headers("Content-Type: application/json")
+    Call<Result<List<String>>> executeRoutine(@Path("routineId") String routineId);
 
 
 

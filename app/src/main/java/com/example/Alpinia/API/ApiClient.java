@@ -1,6 +1,7 @@
 package com.example.Alpinia.API;
 
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.Routine;
 import com.example.Alpinia.API.objects.devices.AirConditionerState;
 import com.example.Alpinia.API.objects.devices.DoorState;
 import com.example.Alpinia.API.objects.Error;
@@ -147,6 +148,46 @@ public class ApiClient {
 
     public Call<Result<List<Device>>> getRoomDevices(String roomId, Callback<Result<List<Device>>> callback) {
         Call<Result<List<Device>>> call = this.service.getRoomDevices(roomId);
+        call.enqueue(callback);
+        return call;
+    }
+
+
+
+    //-------------------------- ROUTINES -------------------------------------------
+
+    public Call<Result<List<Routine>>> getRoutines(Callback<Result<List<Routine>>> callback){
+        Call<Result<List<Routine>>> call = this.service.getRoutines();
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Routine>> addRoutine(Routine routine, Callback<Result<Routine>> callback){
+        Call<Result<Routine>> call = this.service.addRoutine(routine);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> deleteRoutine(String routineId, Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.deleteRoutine(routineId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Routine>> getRoutine(String routineId, Callback<Result<Routine>> callback) {
+        Call<Result<Routine>> call = this.service.getRoutine(routineId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> modifyRoutine(String routineId, Routine routine, Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.modifyRoutine(routineId, routine);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<List<String>>> executeRoutine(String routineId, Callback<Result<List<String>>> callback){
+        Call<Result<List<String>>> call = this.service.executeRoutine(routineId);
         call.enqueue(callback);
         return call;
     }
