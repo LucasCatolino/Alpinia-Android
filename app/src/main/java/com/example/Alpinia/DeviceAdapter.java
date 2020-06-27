@@ -16,8 +16,10 @@ import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.devices.AirConditioner;
 import com.example.Alpinia.API.objects.devices.AirConditionerDialog;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
+import com.example.Alpinia.API.objects.devices.LightsDialog;
 import com.example.Alpinia.API.objects.devices.RefrigeratorDialog;
 import com.example.Alpinia.API.objects.devices.SpeakerDialog;
+import com.example.Alpinia.API.objects.devices.VacuumDialog;
 
 import java.util.List;
 
@@ -40,48 +42,39 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
 
     @Override
     public void onBindViewHolder(@NonNull DeviceAdapter.DeviceViewHolder holder, int position) {
+        final Intent[] intent = new Intent[1];
         holder.name.setText(devices.get(position).getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(devices.get(position).getType().getId().equals( "lsf78ly0eqrjbz91")){
-                    Intent intent = new Intent(context, DoorDialog.class);
-                    intent.putExtra("deviceId",devices.get(position).getId());
-                    intent.putExtra("deviceName",devices.get(position).getName());
-                    context.startActivity(intent);
+                   intent[0] = new Intent(context, DoorDialog.class);
+
                 }
-                if(devices.get(position).getType().getId().equals("rnizejqr2di0okho")){
-                    Intent intent = new Intent(context, RefrigeratorDialog.class);
-                    intent.putExtra("deviceId",devices.get(position).getId());
-                    intent.putExtra("deviceName",devices.get(position).getName());
-                    context.startActivity(intent);
+                else if(devices.get(position).getType().getId().equals("go46xmbqeomjrsjr")){
+                    intent[0] = new Intent(context, LightsDialog.class);
                 }
-                if(devices.get(position).getType().getId().equals("c89b94e8581855bc")){
-                    Intent intent = new Intent(context, SpeakerDialog.class);
-                    intent.putExtra("deviceId",devices.get(position).getId());
-                    intent.putExtra("deviceName",devices.get(position).getName());
-                    context.startActivity(intent);
+                else if(devices.get(position).getType().getId().equals("rnizejqr2di0okho")){
+                    intent[0] = new Intent(context, RefrigeratorDialog.class);
+
                 }
-                if(devices.get(position).getType().getId().equals("li6cbv5sdlatti0j")){
-                    Intent intent = new Intent(context, AirConditionerDialog.class);
-                    intent.putExtra("deviceId",devices.get(position).getId());
-                    intent.putExtra("deviceName",devices.get(position).getName());
-                    context.startActivity(intent);
+                else if(devices.get(position).getType().getId().equals("c89b94e8581855bc")){
+                    intent[0] = new Intent(context, SpeakerDialog.class);
                 }
 
+                else if(devices.get(position).getType().getId().equals("li6cbv5sdlatti0j")) {
+                     intent[0] = new Intent(context, AirConditionerDialog.class);
+                }
 
+                else if(devices.get(position).getType().getId().equals("ofglvd9gqx8yfl3l")) {
+                     intent[0] = new Intent(context, VacuumDialog.class);
+                }
 
+                intent[0].putExtra("deviceId",devices.get(position).getId());
+                intent[0].putExtra("deviceName",devices.get(position).getName());
+                context.startActivity(intent[0]);
 
-
-                else
-                    System.out.println("NO ES UNA PUERTA");
-                /*
-                Acá vamos a tener que ver de que tipo de device estamos hablando.
-                Intent intent = new Intent(context, XXXXX.class);
-                intent.putExtra("deviceId",devices.get(position).getId());
-                context.startActivity(intent);
-
-                */
             }
         });
     }

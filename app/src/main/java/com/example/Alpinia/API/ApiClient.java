@@ -13,6 +13,8 @@ import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.API.objects.devices.Song;
 import com.example.Alpinia.API.objects.devices.SpeakerState;
+import com.example.Alpinia.API.objects.devices.Vacuum;
+import com.example.Alpinia.API.objects.devices.VacuumState;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -25,6 +27,9 @@ import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ApiClient {
@@ -357,6 +362,44 @@ public class ApiClient {
         return call;
     }
 
+//---------------------------VACUUM-----------------
+
+    public Call<Result<VacuumState>> getVacuumState(String deviceId, Callback<Result<VacuumState>> callback){
+        Call<Result<VacuumState>> call = this.service.getVacuumState(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
+
+
+    public Call<Result<Boolean>> startVacuum( String deviceId,  Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.startVacuum(deviceId, "start");
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Result<Boolean>> pauseVacuum( String deviceId, Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.pauseVacuum(deviceId, "pause");
+        call.enqueue(callback);
+        return call;
+    }
+
+
+    public Call<Result<Boolean>> dockVacuum( String deviceId, Callback<Result<Boolean>> callback){
+        Call<Result<Boolean>> call = this.service.dockVacuum(deviceId, "dock");
+        call.enqueue(callback);
+        return call;
+    }
+
+
+    public Call<Result<String>> setVacuumMode( String deviceId,String mode, Callback<Result<String>> callback){
+        String [] aux = new String[1];
+        aux[0] = mode;
+        Call<Result<String>> call = this.service.setVacuumMode(deviceId,"setMode", aux);
+        call.enqueue(callback);
+        return call;
+    }
+
+
 
     //---------------------AIR CONDITIONER-------------------------
 
@@ -411,14 +454,14 @@ public class ApiClient {
         return call;
     }
 
-    public Call<Result<Boolean>> openAc(String deviceId, Callback<Result<Boolean>> callback) {
-        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "open");
+    public Call<Result<Boolean>> turnOnAc(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "turnOn");
         call.enqueue(callback);
         return call;
     }
 
-    public Call<Result<Boolean>> closeAc(String deviceId, Callback<Result<Boolean>> callback) {
-        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "close");
+    public Call<Result<Boolean>> turnOffAc(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.executeActionOnAc(deviceId, "turnOff");
         call.enqueue(callback);
         return call;
     }

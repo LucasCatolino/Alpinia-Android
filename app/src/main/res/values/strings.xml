@@ -87,6 +87,12 @@
         <item>Party</item>
     </string-array>
 
+
+    <string-array name="modes">
+        <item>vacuum</item>
+        <item>mop</item>
+    </string-array>
+
     <string name="fridge_temperature">Temperature of the fridge</string>
     <string-array name="fridge_temperature_options">
         <item>2</item>

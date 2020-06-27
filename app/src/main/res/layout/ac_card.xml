@@ -8,166 +8,132 @@
 
     <TextView
         android:id="@+id/text_speed_ac"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:text="@string/ac_speed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/spin_speed_ac"
-        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_horizontal_ac"
-        app:layout_constraintVertical_bias="0.517" />
+        app:layout_constraintTop_toBottomOf="@+id/text_horizontal_ac" />
 
     <TextView
         android:id="@+id/text_horizontal_ac"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:text="@string/ac_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/text_speed_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_horizontal_ac"
-        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_vertical_ac"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintTop_toBottomOf="@+id/text_vertical_ac" />
 
     <TextView
         android:id="@+id/text_vertical_ac"
-        android:layout_width="63dp"
+        android:layout_width="0dp"
         android:layout_height="16dp"
+        android:layout_marginTop="64dp"
         android:text="@string/ac_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/text_horizontal_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_vertical_ac"
-        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spin_temperature_ac"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintTop_toBottomOf="@+id/text_temperature_ac" />
 
     <Spinner
         android:id="@+id/spin_vertical_ac"
-        android:layout_width="181dp"
-        android:layout_height="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spin_horizontal_ac"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="50dp"
+        android:entries="@array/ac_vertical_options"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.638"
         app:layout_constraintStart_toEndOf="@+id/text_temperature_ac"
-        app:layout_constraintTop_toBottomOf="@+id/close_ac"
-        app:layout_constraintVertical_bias="0.751"
-        android:entries="@array/ac_vertical_options"/>
+        app:layout_constraintTop_toBottomOf="@+id/spin_temperature_ac" />
 
     <Spinner
         android:id="@+id/spin_horizontal_ac"
-        android:layout_width="181dp"
-        android:layout_height="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spin_speed_ac"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="50dp"
+        android:entries="@array/ac_horizontal_options"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toEndOf="@+id/text_vertical_ac"
-        app:layout_constraintTop_toBottomOf="@+id/close_ac"
-        app:layout_constraintVertical_bias="0.842"
-        android:entries="@array/ac_horizontal_options"/>
+        app:layout_constraintTop_toBottomOf="@+id/spin_vertical_ac" />
 
     <Spinner
         android:id="@+id/spin_speed_ac"
-        android:layout_width="181dp"
-        android:layout_height="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="50dp"
+        android:entries="@array/ac_speed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toEndOf="@+id/text_horizontal_ac"
-        app:layout_constraintTop_toBottomOf="@+id/close_ac"
-        app:layout_constraintVertical_bias="0.879"
-        android:entries="@array/ac_speed"/>
+        app:layout_constraintTop_toBottomOf="@+id/spin_horizontal_ac" />
 
     <Spinner
         android:id="@+id/spin_temperature_ac"
-        android:layout_width="181dp"
-        android:layout_height="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spin_vertical_ac"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="30dp"
+        android:entries="@array/ac_temperature_options"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/text_mode_ac"
-        app:layout_constraintTop_toBottomOf="@+id/open_close_ac"
-        app:layout_constraintVertical_bias="0.718"
-        android:entries="@array/ac_temperature_options"/>
+        app:layout_constraintTop_toBottomOf="@+id/spin_mode_ac" />
 
     <TextView
         android:id="@+id/ac_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="@string/ac_title"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/open_close_ac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ac_title"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/open_ac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/door_open"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/open_close_ac"
-        app:layout_constraintHorizontal_bias="0.758"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.193" />
-
-    <TextView
-        android:id="@+id/close_ac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/door_close"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
-        app:layout_constraintStart_toEndOf="@+id/open_close_ac"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.193" />
+        app:layout_constraintTop_toBottomOf="@+id/ac_title" />
 
     <TextView
         android:id="@+id/text_mode_ac"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/ac_mode"
-        app:layout_constraintBottom_toTopOf="@+id/text_temperature_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_mode_ac"
-        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_ac"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintTop_toBottomOf="@+id/open_close_ac" />
 
     <TextView
         android:id="@+id/text_temperature_ac"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="@string/ac_temperature"
-        app:layout_constraintBottom_toTopOf="@+id/text_vertical_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_temperature_ac"
-        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_mode_ac"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintTop_toBottomOf="@+id/text_mode_ac" />
 
     <Spinner
         android:id="@+id/spin_mode_ac"
-        android:layout_width="181dp"
-        android:layout_height="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spin_temperature_ac"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="30dp"
+        android:entries="@array/ac_mode_options"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.362"
-        app:layout_constraintStart_toEndOf="@+id/open_ac"
-        app:layout_constraintTop_toBottomOf="@+id/close_ac"
-        app:layout_constraintVertical_bias="0.486"
-        android:entries="@array/ac_mode_options"/>
+        app:layout_constraintTop_toBottomOf="@+id/open_close_ac" />
 </androidx.constraintlayout.widget.ConstraintLayout>

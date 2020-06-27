@@ -12,6 +12,7 @@ import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.API.objects.devices.Song;
 import com.example.Alpinia.API.objects.devices.SpeakerState;
+import com.example.Alpinia.API.objects.devices.VacuumState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,6 +189,27 @@ public interface ApiService {
     @PUT("devices/{deviceId}/{actionName}")
     @Headers("Content-Type: application/json")
     Call<Result<List<Song>>> getPlaylist(@Path("deviceId") String deviceId,@Path("actionName") String actionName);
+    //-----------------------------VACUUM---------------------
+
+    @GET("devices/{deviceId}/state")
+    Call<Result<VacuumState>> getVacuumState(@Path("deviceId") String deviceId);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> startVacuum(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> pauseVacuum(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<Boolean>> dockVacuum(@Path("deviceId") String deviceId, @Path("actionName") String actionName);
+
+    @PUT("devices/{deviceId}/{actionName}")
+    @Headers("Content-Type: application/json")
+    Call<Result<String>> setVacuumMode(@Path("deviceId") String deviceId, @Path("actionName") String actionName,@Body String [] data);
+
 
 
     //---------------------AIR CONDITIONER-------------------------

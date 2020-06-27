@@ -7,7 +7,7 @@
     android:layout_centerInParent="true">
 
     <TextView
-        android:id="@+id/faucet_dialog_title"
+        android:id="@+id/open_close_switch_faucet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/faucet_title"
@@ -37,7 +37,7 @@
             android:textStyle="bold"/>
 
         <Switch
-            android:id="@+id/open_close_switch_faucet"
+            android:id="@+id/switch_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -96,7 +96,7 @@
             android:text="@string/start_dispensing" />
 
         <Button
-            android:id="@+id/cancel_dispensing"
+            android:id="@+id/mode_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
@@ -116,7 +116,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dispense_exactly"
+            android:id="@+id/dock_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"

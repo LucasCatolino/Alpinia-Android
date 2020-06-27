@@ -2,16 +2,22 @@ package com.example.Alpinia.API.objects.devices;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Error;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.R;
 
@@ -30,473 +36,269 @@ public class AirConditionerDialog extends AppCompatActivity {
     private Spinner spinHorizontalSwing;
     private Spinner spinSpeed;
     private Switch switchOpenClose;
+    TextView acDetails;
+
+    ArrayAdapter<CharSequence> tempAdapter;
+
+    ArrayAdapter<CharSequence> speedAdapter;
     AirConditionerState myState;
+    ArrayAdapter<CharSequence> modeAdapter;
+    ArrayAdapter<CharSequence> horizontalSwingAdapter;
+    ArrayAdapter<CharSequence> verticalSwingAdapter;
 
 
-
-    // sobreescribo el onCreate para relacionarlo con el layout del aire acondicionado
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = (Context) this;
         setContentView(R.layout.ac_card);
-        // instancio la API
+        context = (Context) this;
         api = ApiClient.getInstance();
         deviceId = getIntent().getStringExtra("deviceId");
-        // hago que las variables creadas referencian a los botones del layout
-        spinMode = findViewById(R.id.spin_mode_ac);
-        spinTemperature = findViewById(R.id.spin_temperature_ac);
-        spinVerticalSwing = findViewById(R.id.spin_vertical_ac);
-        spinHorizontalSwing = findViewById(R.id.spin_horizontal_ac);
-        spinSpeed = findViewById(R.id.spin_speed_ac);
-        switchOpenClose = findViewById(R.id.open_close_ac);
 
-        /*
+        switchOpenClose = (Switch) findViewById(R.id.open_close_ac);
+        spinTemperature = (Spinner) findViewById(R.id.spin_temperature_ac);
+        spinMode = (Spinner) findViewById(R.id.spin_mode_ac);
+        spinVerticalSwing = (Spinner) findViewById(R.id.spin_vertical_ac);
+        spinHorizontalSwing = (Spinner) findViewById(R.id.spin_horizontal_ac);
+        spinSpeed = (Spinner) findViewById(R.id.spin_speed_ac);
 
-     VER TEMA DEL SWITCH ON Y OFF
+        tempAdapter = ArrayAdapter.createFromResource(this, R.array.ac_temperature_options,android.R.layout.simple_list_item_1);
+        tempAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        speedAdapter = ArrayAdapter.createFromResource(this,R.array.ac_speed,android.R.layout.simple_list_item_1);
+        speedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        modeAdapter = ArrayAdapter.createFromResource(this,R.array.ac_mode_options,android.R.layout.simple_list_item_1);
+        modeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        horizontalSwingAdapter = ArrayAdapter.createFromResource(this,R.array.ac_horizontal_options,android.R.layout.simple_list_item_1);
+        horizontalSwingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        verticalSwingAdapter = ArrayAdapter.createFromResource(this,R.array.ac_vertical_options,android.R.layout.simple_list_item_1);
+        verticalSwingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinTemperature.setAdapter(tempAdapter);
+        spinMode.setAdapter(modeAdapter);
 
         switchOpenClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(myState.isOpen()){
-                    closeAc();
+                    turnOffAc();
                 }
-                else{
-                    openAc();
-                }
-            }
-        });
-
-         */
-
-        // obtengo el estado del aire acondicionado
-        api.getAirConditionerState(deviceId, new Callback<Result<AirConditionerState>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<AirConditionerState>> call, @NonNull Response<Result<AirConditionerState>> response) {
-                if(response.isSuccessful()) {
-                    Result<AirConditionerState> result = response.body();
-                    if(result != null) {
-                        AirConditionerState acState = result.getResult();
-                        //temperature_aux = tempratura actual del aire acondicionado (en la API)
-                        Integer temperature_aux = acState.getTemperature();
-                        // temperature_aux2 = índice de la tempratura en la que está el aire acondicionado (que índice en el arreglo ocupa) -> estamos trabajando con Spinners
-                        // le paso la temperatura y me devuelve el índice que ocupa en el arreglo -> función getIndex
-                        int temperature_aux2 = getIndex(spinTemperature, temperature_aux.toString());
-                        // en la interfaz selecciono el índice que me devuelve la función
-                        spinTemperature.setSelection(temperature_aux2);
-                        // la API me devuelve el modo en el que está el aire acondicionado e itero sobre las 3 opciones posibles para seleccionar el índice adecuado
-                        String mode_aux = acState.getMode();
-                        if(mode_aux.equals("ventilation")){
-                            spinMode.setSelection(0);
-                        } else if(mode_aux.equals("cold")){
-                            spinMode.setSelection(1);
-                        } else if(mode_aux.equals("hot")){
-                            spinMode.setSelection(2);
-                        }
-                        // MISMO PROCEDIMIENTO PARA EL ALA HORIZONTAL, VERTICAL Y LA VELOCIDAD
-                        // helice vertical
-                        String vertical_aux = acState.getVerticalSwing();
-                        if(vertical_aux.equals("default")){
-                            spinVerticalSwing.setSelection(0);
-                        } else if(vertical_aux.equals("22")){
-                            spinVerticalSwing.setSelection(1);
-                        } else if(vertical_aux.equals("45")){
-                            spinVerticalSwing.setSelection(2);
-                        } else if(vertical_aux.equals("67")){
-                            spinVerticalSwing.setSelection(3);
-                        } else if(vertical_aux.equals("90")){
-                            spinVerticalSwing.setSelection(4);
-                        }
-                        // helice horizontal
-                        String horizontal_aux = acState.getHorizontalSwing();
-                        if(horizontal_aux.equals("default")){
-                            spinHorizontalSwing.setSelection(0);
-                        } else if(horizontal_aux.equals("-90")){
-                            spinHorizontalSwing.setSelection(1);
-                        } else if(horizontal_aux.equals("-45")){
-                            spinHorizontalSwing.setSelection(2);
-                        } else if(horizontal_aux.equals("0")){
-                            spinHorizontalSwing.setSelection(3);
-                        } else if(horizontal_aux.equals("45")){
-                            spinHorizontalSwing.setSelection(4);
-                        } else if(horizontal_aux.equals("90")){
-                            spinHorizontalSwing.setSelection(5);
-                        }
-                        // velocidad del aire acondicionado
-                        String speed_aux = acState.getFanSpeed();
-                        if(speed_aux.equals("default")){
-                            spinSpeed.setSelection(0);
-                        } else if(speed_aux.equals("25")){
-                            spinSpeed.setSelection(1);
-                        } else if(speed_aux.equals("50")){
-                            spinSpeed.setSelection(2);
-                        } else if(speed_aux.equals("75")){
-                            spinSpeed.setSelection(3);
-                        } else if(speed_aux.equals("100")){
-                            spinSpeed.setSelection(4);
-                        }
-
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<AirConditionerState>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-
-        // invoca a la función changeMode() cuando se selecciona un ítem del spinner de mode
-        spinMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                changeMode();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // no se selecciono ninguna opción -> no hace nada
+                else
+                    turnOnAc();
             }
         });
 
         spinTemperature.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                changeTemp();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setAcTemperature(Integer.valueOf(spinTemperature.getSelectedItem().toString()));
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // no se selecciono ninguna opción -> no hace nada
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        // invoca a la función changeVerticalSwing() cuando se selecciona un ítem del spinner de la helice vertical
-        spinVerticalSwing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                changeVerticalSwing();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // no se selecciono ninguna opción -> no hace nada
-            }
-        });
-
-        // invoca a la función changeHorizontalSwing() cuando se selecciona un ítem del spinner de la helice horizontal
-        spinHorizontalSwing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                changeHorizontalSwing();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // no se selecciono ninguna opción -> no hace nada
-            }
-        });
-        // invoca a la función  changeSpeed() cuando se selecciona un ítem del spinner de la velocidad del aire
         spinSpeed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                changeSpeed();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setSpinSpeed(spinSpeed.getSelectedItem().toString());
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // no se selecciono ninguna opción -> no hace nada
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinHorizontalSwing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setHorizontalSwing(spinHorizontalSwing.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinVerticalSwing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setVerticalSwing(spinVerticalSwing.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        updateState();
+
+
+    }
+
+
+
+    public void setAcTemperature(Integer temp){
+        api.setAcTemp(deviceId, temp, new Callback<Result<Integer>>() {
+            @Override
+            public void onResponse(Call<Result<Integer>> call, Response<Result<Integer>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+                else
+                    handleError(response);
+            }
+
+            @Override
+            public void onFailure(Call<Result<Integer>> call, Throwable t) {
+                handleUnexpectedError(t);
             }
         });
     }
 
-    // CERRAMOS EL ON.CREATE, ARRANCAMOS CON LAS FUNCIONES QUE SE IMPLEMENTAN AL TOCAR LOS BOTONES
-
-
-    private void changeMode() {
-        api.changeAirConditionerMode(deviceId, spinMode.getSelectedItem().toString().toLowerCase(), new Callback<Result<Boolean>>() {
+    public void setSpinSpeed(String speed){
+        api.setFanSpeed(deviceId, speed, new Callback<Result<Boolean>>() {
             @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        updateStateOnce();
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
                 }
+                else
+                    handleError(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo de error
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
             }
         });
     }
 
-    private void changeTemp() {
-        api.setAcTemp(deviceId, Integer.parseInt(spinTemperature.getSelectedItem().toString()), new Callback<Result<Integer>>() {
+    public void setHorizontalSwing(String swing){
+        api.setHorizontalSwing(deviceId, swing, new Callback<Result<Boolean>>() {
             @Override
-            public void onResponse(@NonNull Call<Result<Integer>> call, @NonNull Response<Result<Integer>> response) {
-                if(response.isSuccessful()) {
-                    Result<Integer> result = response.body();
-                    if(result != null) {
-                        updateStateOnce();
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<Integer>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-    }
-
-    private void changeVerticalSwing() {
-        api.setVerticalSwing(deviceId, spinVerticalSwing.getSelectedItem().toString().toLowerCase(), new Callback<Result<Boolean>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        updateStateOnce();
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-    }
-
-    private void changeHorizontalSwing() {
-        api.setHorizontalSwing(deviceId, spinHorizontalSwing.getSelectedItem().toString().toLowerCase(), new Callback<Result<Boolean>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        updateStateOnce();
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-    }
-
-    private void changeSpeed() {
-        api.setFanSpeed(deviceId, spinSpeed.getSelectedItem().toString().toLowerCase(), new Callback<Result<Boolean>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        updateStateOnce();
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-    }
-
-    // FUNCION AUXILIAR -> me indica la posición en el arreglo
-    private int getIndex(Spinner spinner, String myString){
-        for (int i = 0; i < spinner.getCount(); i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private void updateStateOnce() {
-        api.getAirConditionerState(deviceId, new Callback<Result<AirConditionerState>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<AirConditionerState>> call, @NonNull Response<Result<AirConditionerState>> response) {
-                if(response.isSuccessful()) {
-                    Result<AirConditionerState> result = response.body();
-                    if(result != null) {
-                        AirConditionerState acState = result.getResult();
-                        //temperature_aux = tempratura actual del aire acondicionado (en la API)
-                        Integer temperature_aux = acState.getTemperature();
-                        // temperature_aux2 = índice de la tempratura en la que está el aire acondicionado (que índice en el arreglo ocupa) -> estamos trabajando con Spinners
-                        // le paso la temperatura y me devuelve el índice que ocupa en el arreglo -> función getIndex
-                        int temperature_aux2 = getIndex(spinTemperature, temperature_aux.toString());
-                        // en la interfaz selecciono el índice que me devuelve la función
-                        spinTemperature.setSelection(temperature_aux2);
-                        // la API me devuelve el modo en el que está el aire acondicionado e itero sobre las 3 opciones posibles para seleccionar el índice adecuado
-                        String mode_aux = acState.getMode();
-                        if(mode_aux.equals("ventilation")){
-                            spinMode.setSelection(0);
-                        } else if(mode_aux.equals("cold")){
-                            spinMode.setSelection(1);
-                        } else if(mode_aux.equals("hot")){
-                            spinMode.setSelection(2);
-                        }
-                        // MISMO PROCEDIMIENTO PARA EL ALA HORIZONTAL, VERTICAL Y LA VELOCIDAD
-                        // helice vertical
-                        String vertical_aux = acState.getVerticalSwing();
-                        if(vertical_aux.equals("default")){
-                            spinVerticalSwing.setSelection(0);
-                        } else if(vertical_aux.equals("22")){
-                            spinVerticalSwing.setSelection(1);
-                        } else if(vertical_aux.equals("45")){
-                            spinVerticalSwing.setSelection(2);
-                        } else if(vertical_aux.equals("67")){
-                            spinVerticalSwing.setSelection(3);
-                        } else if(vertical_aux.equals("90")){
-                            spinVerticalSwing.setSelection(4);
-                        }
-                        // helice horizontal
-                        String horizontal_aux = acState.getHorizontalSwing();
-                        if(horizontal_aux.equals("default")){
-                            spinHorizontalSwing.setSelection(0);
-                        } else if(horizontal_aux.equals("-90")){
-                            spinHorizontalSwing.setSelection(1);
-                        } else if(horizontal_aux.equals("-45")){
-                            spinHorizontalSwing.setSelection(2);
-                        } else if(horizontal_aux.equals("0")){
-                            spinHorizontalSwing.setSelection(3);
-                        } else if(horizontal_aux.equals("45")){
-                            spinHorizontalSwing.setSelection(4);
-                        } else if(horizontal_aux.equals("90")){
-                            spinHorizontalSwing.setSelection(5);
-                        }
-                        // velocidad del aire acondicionado
-                        String speed_aux = acState.getFanSpeed();
-                        if(speed_aux.equals("default")){
-                            spinSpeed.setSelection(0);
-                        } else if(speed_aux.equals("25")){
-                            spinSpeed.setSelection(1);
-                        } else if(speed_aux.equals("50")){
-                            spinSpeed.setSelection(2);
-                        } else if(speed_aux.equals("75")){
-                            spinSpeed.setSelection(3);
-                        } else if(speed_aux.equals("100")){
-                            spinSpeed.setSelection(4);
-                        }
-
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<AirConditionerState>> call, @NonNull Throwable t) {
-                //manejo de error
-            }
-        });
-    }
-
-    /*
-
-    FALTA IMPLEMENTAR EL BOTON DE ON Y OFF
-
-    private void openAc() {
-        api.openAc(deviceId, new Callback<Result<Boolean>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    spinTemperature.setVisibility(View.VISIBLE);
-                    spinHorizontalSwing.setVisibility(View.VISIBLE);
-                    spinMode.setVisibility(View.VISIBLE);
-                    spinVerticalSwing.setVisibility(View.VISIBLE);
-                    spinSpeed.setVisibility(View.VISIBLE);
-                    switchOpenClose.setChecked(myState.isOpen());
-                }
-                else {
-                    //
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //
-            }
-        });
-    }
-
-
-    private void closeAc() {
-        api.closeDoor(deviceId, new Callback<Result<Boolean>>() {
-            @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if(response.isSuccessful()) {
                     updateState();
-                    spinTemperature.setVisibility(View.INVISIBLE);
-                    spinHorizontalSwing.setVisibility(View.INVISIBLE);
-                    spinMode.setVisibility(View.INVISIBLE);
-                    spinVerticalSwing.setVisibility(View.INVISIBLE);
-                    spinSpeed.setVisibility(View.INVISIBLE);
-                    switchOpenClose.setChecked(myState.isOpen());
                 }
-                else {
-                  //  handleError(response);
-                }
+                else
+                    handleError(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-              //  handleUnexpectedError(t);
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
             }
         });
     }
 
-    private void updateState() {
+    public void setVerticalSwing(String swing){
+        api.setVerticalSwing(deviceId, swing, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()) {
+                    updateState();
+                }
+                else
+                    handleError(response);
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void turnOnAc(){
+        api.turnOnAc(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void turnOffAc(){
+        api.turnOffAc(deviceId, new Callback<Result<Boolean>>() {
+            @Override
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if(response.isSuccessful()){
+                    updateState();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    public void updateState(){
         api.getAirConditionerState(deviceId, new Callback<Result<AirConditionerState>>() {
             @Override
             public void onResponse(Call<Result<AirConditionerState>> call, Response<Result<AirConditionerState>> response) {
                 if(response.isSuccessful()){
                     Result<AirConditionerState> result = response.body();
                     myState = result.getResult();
-                    switchOpenClose.setChecked(myState.isOpen());
-                }
-                else{
-                  //  handleError(response);
-                }
 
+                    spinTemperature.setSelection(tempAdapter.getPosition(myState.getTemperature().toString()));
+                    spinMode.setSelection(modeAdapter.getPosition(myState.getMode()));
+                    spinVerticalSwing.setSelection(verticalSwingAdapter.getPosition(myState.getVerticalSwing()));
+                    spinHorizontalSwing.setSelection(horizontalSwingAdapter.getPosition(myState.getHorizontalSwing()));
+                    spinSpeed.setSelection(speedAdapter.getPosition(myState.getFanSpeed()));
+
+                    switchOpenClose.setChecked(myState.isOpen());
+                    toggleButtons(myState.isOpen());
+                }
+                else
+                    handleError(response);
             }
 
             @Override
             public void onFailure(Call<Result<AirConditionerState>> call, Throwable t) {
-               // handleUnexpectedError(t);
+                handleUnexpectedError(t);
             }
         });
     }
 
-     */
+    private <T> void handleError(Response<T> response) {
+        Error error = ApiClient.getInstance().getError(response.errorBody());
+        String text = getResources().getString(R.string.error_message, error.getDescription().get(0), error.getCode());
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleUnexpectedError(Throwable t) {
+        String LOG_TAG = "App";
+        Log.e(LOG_TAG, t.toString());
+    }
+
+    private void toggleButtons(boolean enabled){
+
+        spinTemperature.setEnabled(enabled);
+        spinMode.setEnabled(enabled);
+        spinVerticalSwing.setEnabled(enabled);
+        spinHorizontalSwing.setEnabled(enabled);
+        spinSpeed.setEnabled(enabled);
+
+    }
+
 
 }
-

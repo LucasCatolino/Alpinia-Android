@@ -68,6 +68,15 @@
             android:label="@string/AirConditionerDialog"
             android:parentActivityName=".DeviceActivity">
         </activity>
+        <activity android:name=".API.objects.devices.VacuumDialog"
+            android:label="@string/overflow_settings"
+            android:parentActivityName=".DeviceActivity">
+        </activity>
+
+        <activity android:name=".API.objects.devices.LightsDialog"
+            android:label="@string/overflow_settings"
+            android:parentActivityName=".DeviceActivity">
+        </activity>
 
     </application>
 
