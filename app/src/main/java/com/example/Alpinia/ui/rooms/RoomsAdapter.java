@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.ApiClient;
@@ -16,6 +17,8 @@ import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.DeviceActivity;
+import com.example.Alpinia.DeviceAdapter;
+import com.example.Alpinia.HomesAdapter;
 import com.example.Alpinia.R;
 
 import java.util.List;
@@ -45,19 +48,17 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
     public void onBindViewHolder(@NonNull RoomsAdapter.RoomViewHolder holder, int position) {
         holder.name.setText(rooms.get(position).getName());
         StringBuilder strBuilder = new StringBuilder();
-        final String[] str = new String[1];
 
         ApiClient.getInstance().getRoomDevices(rooms.get(position).getId(), new Callback<Result<List<Device>>>() {
             @Override
             public void onResponse(Call<Result<List<Device>>> call, Response<Result<List<Device>>> response) {
                 if(response.isSuccessful()){
                     Result<List<Device>> result = response.body();
-
-                    for(int i = 0; i < result.getResult().size(); i++){
-                        System.out.println(result.getResult().get(i).toString());
-                        strBuilder.append(result.getResult().get(i));
+                    if(result.getResult() != null){
+                        DeviceAdapter myAdapter = new DeviceAdapter(context,result.getResult());
+                        holder.devices.setAdapter(myAdapter);
+                        holder.devices.setLayoutManager(new LinearLayoutManager(context));
                     }
-                    holder.devices.setText(strBuilder.toString());
                 }
             }
 
@@ -67,15 +68,7 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
             }
         });
 
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DeviceActivity.class);
-                intent.putExtra("roomId",rooms.get(position).getId());
-                context.startActivity(intent);
-            }
-        });
+        
     }
 
     @Override
@@ -86,12 +79,12 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
     public class RoomViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView roomIcon;
-        TextView devices;
+        RecyclerView devices;
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomIcon = itemView.findViewById(R.id.roomImg);
             name = itemView.findViewById(R.id.tvRoomName);
-            devices = itemView.findViewById(R.id.device_list);
+            devices = itemView.findViewById(R.id.recyclerdevices);
         }
     }
 }
