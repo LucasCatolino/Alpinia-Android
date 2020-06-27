@@ -2,20 +2,29 @@ package com.example.Alpinia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Error;
+import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Routine;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineViewHolder>{
@@ -41,9 +50,21 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("homeId",routines.get(position).getId());
-                context.startActivity(intent);
+                ApiClient.getInstance().executeRoutine(routines.get(position).getId(), new Callback<Result<List<String>>>() {
+                    @Override
+                    public void onResponse(Call<Result<List<String>>> call, Response<Result<List<String>>> response) {
+                        if(response.isSuccessful()){
+                            System.out.println(response.body().getResult().get(0));
+                        }
+                        else
+                            handleError(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result<List<String>>> call, Throwable t) {
+                        handleUnexpectedError(t);
+                    }
+                });
             }
         });
     }
@@ -61,6 +82,16 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
             routineIcon = itemView.findViewById(R.id.roomImg);
             name = itemView.findViewById(R.id.routine_name);
         }
+    }
+    private <T> void handleError(Response<T> response) {
+        Error error = ApiClient.getInstance().getError(response.errorBody());
+        String text = context.getResources().getString(R.string.error_message, error.getDescription().get(0), error.getCode());
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleUnexpectedError(Throwable t) {
+        String LOG_TAG = "App";
+        Log.e(LOG_TAG, t.toString());
     }
 
 }
