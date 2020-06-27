@@ -55,9 +55,10 @@ public class Routine {
     @NonNull
     @Override
     public String toString() {
-        if (this.getId() != null)
-            return String.format("%s - %s", this.getId(), this.getName());
-        else
-            return this.getName();
+        String resp = "";
+        for(int i = 0; i < actions.size(); i++){
+            resp = resp + (actions.get(0).toString() + '\n');
+        }
+        return resp;
     }
 }

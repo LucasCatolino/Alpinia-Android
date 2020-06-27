@@ -32,4 +32,9 @@ public class DeviceActions {
     public String getActionName() {
         return actionName;
     }
+
+    @Override
+    public String toString() {
+        return actionName + " " + device.getName();
+    }
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,17 +48,18 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
         holder.name.setText(routines.get(position).getName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.executeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiClient.getInstance().executeRoutine(routines.get(position).getId(), new Callback<Result<List<String>>>() {
                     @Override
                     public void onResponse(Call<Result<List<String>>> call, Response<Result<List<String>>> response) {
                         if(response.isSuccessful()){
-                            System.out.println(response.body().getResult().get(0));
+                            Toast.makeText(context,"Routine executed",Toast.LENGTH_SHORT).show();
                         }
-                        else
+                        else {
                             handleError(response);
+                        }
                     }
 
                     @Override
@@ -67,6 +69,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
                 });
             }
         });
+        holder.description.setText(routines.get(position).toString());
     }
 
     @Override
@@ -77,11 +80,16 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
     public class RoutineViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView routineIcon;
+        Button executeButton;
+        TextView description;
         public RoutineViewHolder(@NonNull View itemView) {
             super(itemView);
             routineIcon = itemView.findViewById(R.id.roomImg);
             name = itemView.findViewById(R.id.routine_name);
+            executeButton = itemView.findViewById(R.id.execute);
+            description =  itemView.findViewById(R.id.routine_description);
         }
+
     }
     private <T> void handleError(Response<T> response) {
         Error error = ApiClient.getInstance().getError(response.errorBody());
