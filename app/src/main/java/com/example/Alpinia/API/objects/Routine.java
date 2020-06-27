@@ -57,7 +57,7 @@ public class Routine {
     public String toString() {
         String resp = "";
         for(int i = 0; i < actions.size(); i++){
-            resp = resp + (actions.get(0).toString() + '\n');
+            resp = resp + (actions.get(i).toString() + '\n');
         }
         return resp;
     }

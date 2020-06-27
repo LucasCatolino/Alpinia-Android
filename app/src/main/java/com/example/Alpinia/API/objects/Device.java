@@ -63,11 +63,6 @@ public class Device {
 
     @Override
     public String toString() {
-        return "Device{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", meta=" + meta +
-                '}';
+        return name + ": " + type.getName() + '\n';
     }
 }

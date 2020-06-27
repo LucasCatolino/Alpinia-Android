@@ -145,7 +145,6 @@ public class FragmentRooms extends Fragment {
                 if (response.isSuccessful()) {
                     Result<List<Room>> result = response.body();
                     roomsList = result.getResult();
-                    System.out.println(result.getResult().toString());
                     if(roomsList != null){
                         RoomsAdapter myAdapter = new RoomsAdapter(context,roomsList);
                         recyclerView.setAdapter(myAdapter);

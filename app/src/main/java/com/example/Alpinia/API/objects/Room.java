@@ -56,23 +56,7 @@ public class Room {
         this.meta = meta;
     }
 
-    @Override
-    public String toString() {
-        if (this.getId() != null)
-        {
-            if (this.getMeta() != null)
-                return String.format("%s - %s - %s", this.getId(), this.getName(), this.getMeta());
-            else
-                return String.format("%s - %s", this.getId(), this.getName());
-        }
-        else
-        {
-            if (this.getMeta() != null)
-                return String.format("%s - %s", this.getName(), this.getMeta());
-            else
-                return this.getName();
-        }
-    }
+
 
     public Home getHome() {
         return home;
