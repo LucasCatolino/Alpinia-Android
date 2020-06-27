@@ -1,262 +1,200 @@
 package com.example.Alpinia.API.objects.devices;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.Alpinia.API.ApiClient;
+import com.example.Alpinia.API.objects.Error;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.R;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-
+import java.util.Scanner;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FaucetDialog extends Fragment {
+public class FaucetDialog extends AppCompatActivity {
+    EditText toDispense;
+    Button startButton;
+    TextView faucetName;
+    Spinner unitSpinner;
+    Switch onOffSwitch;
 
-    private String deviceId;
-    private Switch switchOpenClose;
-    private Button buttonDispenseAuto, buttonStop, buttonCancel, buttonStart;
-    private EditText amountToDispense;
-    private Spinner spinnerQuantity;
-
-    private ApiClient api;
-
-    private boolean isOpen;
-
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.faucet_card, container, false);
-    }
+    FaucetState state;
+    ApiClient api;
+    String deviceId;
+    String deviceName;
+    ArrayAdapter<CharSequence> units;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        readBundle(getArguments());
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.faucet_card);
 
-        init(requireView());
-    }
+        faucetName = findViewById(R.id.fauce_name);
+        startButton = findViewById(R.id.start_dispensing);
+        toDispense = findViewById(R.id.amount_to_dispense);
+        unitSpinner = findViewById(R.id.unit_spinner);
+        onOffSwitch = findViewById(R.id.switch_button);
 
-    private void init(View view) {
-        switchOpenClose = view.findViewById(R.id.open_close_switch_faucet);
-        buttonDispenseAuto = view.findViewById(R.id.dispense_exactly);
-        buttonStop = view.findViewById(R.id.stop_button);
-        buttonStart = view.findViewById(R.id.start_dispensing);
-        buttonCancel = view.findViewById(R.id.cancel_dispensing);
-        amountToDispense = view.findViewById(R.id.amount_to_dispense);
-        spinnerQuantity = view.findViewById(R.id.unit_spinner);
+        units = ArrayAdapter.createFromResource(this, R.array.units, android.R.layout.simple_list_item_1);
+        units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unitSpinner.setAdapter(units);
 
-        api = ApiClient.getInstance();
-
-        api.getFaucetState(deviceId, new Callback<Result<FaucetState>>() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(@NonNull Call<Result<FaucetState>> call, @NonNull Response<Result<FaucetState>> response) {
-                if(response.isSuccessful()) {
-                    Result<FaucetState> result = response.body();
-                    if(result != null) {
-                        FaucetState faucetState = result.getResult();
-                        isOpen = faucetState.isOpen();
-                        switchOpenClose.setChecked(isOpen);
-                    } else {
-                        //manejo de error
-                    }
-                } else {
-                    //manejo de error
-            }
-            }
+            public void onClick(View v) {
+                if (isInteger(toDispense.getText().toString())
+                        && Integer.valueOf(toDispense.getText().toString()) > 0
+                        && Integer.valueOf(toDispense.getText().toString()) < 101){
 
-            @Override
-            public void onFailure(@NonNull Call<Result<FaucetState>> call, @NonNull Throwable t) {
-                //manejo de error
+                    startDispensing(Integer.valueOf(toDispense.getText().toString()));
+                }
+                else{
+                    toDispense.setError("Must be a number between 1 and 100!");
+                }
+
             }
         });
 
-        if(isOpen)
-            buttonDispenseAuto.setVisibility(View.INVISIBLE);
-
-        buttonStop.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.INVISIBLE);
-        buttonCancel.setVisibility(View.INVISIBLE);
-        amountToDispense.setVisibility(View.INVISIBLE);
-        spinnerQuantity.setVisibility(View.INVISIBLE);
-
-        buttonStop.setOnClickListener(this::stopDispensing);
-        buttonStart.setOnClickListener(this::startDispensing);
-        buttonDispenseAuto.setOnClickListener(this::dispenseAutomatically);
-        buttonCancel.setOnClickListener(this::cancelButtonPressed);
-
-
-        if(switchOpenClose != null) {
-            switchOpenClose.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    openFaucet();
-                } else {
+        onOffSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(state.isOpen()){
                     closeFaucet();
                 }
-            });
-        }
+                else
+                    openFaucet();
+            }
+        });
+
+        api = ApiClient.getInstance();
+        deviceId = getIntent().getStringExtra("deviceId");
+        faucetName.setText( getIntent().getStringExtra("deviceName"));
+
+        updateState();
     }
 
-    private void readBundle(Bundle bundle) {
-        if (bundle != null) {
-            deviceId = bundle.getString("deviceId");
-        }
-    }
-
-    @NonNull
-    public static FaucetDialog newInstance(String deviceId) {
-        Bundle bundle = new Bundle();
-        bundle.putString("deviceId", deviceId);
-
-        FaucetDialog fragment = new FaucetDialog();
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
-
-    private void openFaucet() {
-        if(isOpen) {
-            Toast.makeText(getContext(), "THE FAUCET WAS ALREADY OPENED !!!!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
+    public void openFaucet() {
         api.openFaucet(deviceId, new Callback<Result<Boolean>>() {
             @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        Toast.makeText(getContext(), "OPENING FAUCET....", Toast.LENGTH_LONG).show();
-                        isOpen = true;
-                        buttonDispenseAuto.setVisibility(View.INVISIBLE);
-                        buttonStop.setVisibility(View.INVISIBLE);
-                        buttonStart.setVisibility(View.INVISIBLE);
-                        buttonCancel.setVisibility(View.INVISIBLE);
-                        amountToDispense.setVisibility(View.INVISIBLE);
-                        spinnerQuantity.setVisibility(View.INVISIBLE);
-                    } else {
-                        //manejo error
-                    }
-                } else {
-                    //manejo error
-                }
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if (response.isSuccessful())
+                    updateState();
+                else
+                    handleError(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo error
-        }
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
         });
     }
 
-    private void closeFaucet() {
-        if(!isOpen) {
-            Toast.makeText(getContext(), "THE FAUCET WAS ALREADY CLOSED", Toast.LENGTH_LONG).show();
-            return;
-        }
-
+    public void closeFaucet() {
         api.closeFaucet(deviceId, new Callback<Result<Boolean>>() {
             @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        Toast.makeText(getContext(), "CLOSING FAUCET....", Toast.LENGTH_LONG).show();
-                        isOpen = false;
-                        buttonDispenseAuto.setVisibility(View.INVISIBLE);
-                        buttonStop.setVisibility(View.INVISIBLE);
-                        buttonStart.setVisibility(View.INVISIBLE);
-                        buttonCancel.setVisibility(View.INVISIBLE);
-                        amountToDispense.setVisibility(View.INVISIBLE);
-                        spinnerQuantity.setVisibility(View.INVISIBLE);
-                    } else {
-                        //manejo error
-                    }
-                } else {
-                    //manejo error
-                }
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if (response.isSuccessful())
+                    updateState();
+                else
+                    handleError(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo error
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
             }
         });
     }
 
-    private void dispenseAutomatically(View view) {
-        buttonDispenseAuto.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.VISIBLE);
-        buttonCancel.setVisibility(View.VISIBLE);
-        amountToDispense.setVisibility(View.VISIBLE);
-        spinnerQuantity.setVisibility(View.VISIBLE);
-    }
-
-    private void cancelButtonPressed(View view) {
-        buttonDispenseAuto.setVisibility(View.VISIBLE);
-        buttonStart.setVisibility(View.INVISIBLE);
-        buttonCancel.setVisibility(View.INVISIBLE);
-        amountToDispense.setVisibility(View.INVISIBLE);
-        spinnerQuantity.setVisibility(View.INVISIBLE);
-    }
-
-    private void stopDispensing(View view) {
-        closeFaucet();
-    }
-
-    private void startDispensing(View view) {
-        try{
-            Integer.parseInt(amountToDispense.getText().toString());
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "PLEASE, ENTER AN AMOUNT", Toast.LENGTH_LONG).show();
-            amountToDispense.setText("");
-            return;
-        }
-
-        int currentAmount = Integer.parseInt(amountToDispense.getText().toString());
-        String unit = spinnerQuantity.getSelectedItem().toString();
-
-        if(currentAmount == 0) {
-            Toast.makeText(getContext(), "YOU HAVE TO ENTER A NUMBER GREATER THAN ZERO", Toast.LENGTH_LONG).show();
-            amountToDispense.setText("");
-            return;
-        }
-
-
-        api.dispenseExactAmount(deviceId, currentAmount, unit, new Callback<Result<Boolean>>() {
+    public void startDispensing(Integer amount) {
+        api.dispenseExactAmount(deviceId, amount, unitSpinner.getSelectedItem().toString(), new Callback<Result<Boolean>>() {
             @Override
-            public void onResponse(@NonNull Call<Result<Boolean>> call, @NonNull Response<Result<Boolean>> response) {
-                if(response.isSuccessful()) {
-                    Result<Boolean> result = response.body();
-                    if(result != null) {
-                        Toast.makeText(getContext(), "DISPENSING " + amountToDispense + unit, Toast.LENGTH_LONG).show();
-                        switchOpenClose.setChecked(true);
-                    } else {
-                        //manejo error
-                    }
+            public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                if (response.isSuccessful()) {
+                    updateState();
                 } else {
-                    //manejo error
+                    handleError(response);
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Result<Boolean>> call, @NonNull Throwable t) {
-                //manejo error
+            public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                handleUnexpectedError(t);
             }
         });
+    }
+
+    public void updateState() {
+        api.getFaucetState(deviceId, new Callback<Result<FaucetState>>() {
+            @Override
+            public void onResponse(Call<Result<FaucetState>> call, Response<Result<FaucetState>> response) {
+                if (response.isSuccessful()) {
+                    Result<FaucetState> result = response.body();
+                    state = result.getResult();
+
+                    onOffSwitch.setChecked(state.isOpen());
+                    toggleButtons(state.isOpen());
+                } else
+                    handleError(response);
+            }
+
+            @Override
+            public void onFailure(Call<Result<FaucetState>> call, Throwable t) {
+                handleUnexpectedError(t);
+            }
+        });
+    }
+
+    private <T> void handleError(Response<T> response) {
+        Error error = ApiClient.getInstance().getError(response.errorBody());
+        String text = getResources().getString(R.string.error_message, error.getDescription().get(0), error.getCode());
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleUnexpectedError(Throwable t) {
+        String LOG_TAG = "App";
+        Log.e(LOG_TAG, t.toString());
+    }
+
+    private void toggleButtons(boolean enabled) {
+        unitSpinner.setEnabled(enabled);
+        startButton.setEnabled(enabled);
+        toDispense.setEnabled(enabled);
+    }
+
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
     }
 }

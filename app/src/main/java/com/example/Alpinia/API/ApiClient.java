@@ -249,7 +249,7 @@ public class ApiClient {
         ArrayList<Object> aux = new ArrayList<>();
         aux.add(amount);
         aux.add(unit);
-        Call<Result<Boolean>> call = this.service.dispenseExactAmount(deviceId, "setLevel", aux);
+        Call<Result<Boolean>> call = this.service.dispenseExactAmount(deviceId, "dispense", aux);
         call.enqueue(callback);
         return call;
     }

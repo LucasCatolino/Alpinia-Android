@@ -77,6 +77,10 @@
             android:label="@string/overflow_settings"
             android:parentActivityName=".DeviceActivity">
         </activity>
+        <activity android:name=".API.objects.devices.FaucetDialog"
+            android:label="@string/overflow_settings"
+            android:parentActivityName=".DeviceActivity">
+        </activity>
 
     </application>
 

@@ -16,6 +16,7 @@ import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.devices.AirConditioner;
 import com.example.Alpinia.API.objects.devices.AirConditionerDialog;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
+import com.example.Alpinia.API.objects.devices.FaucetDialog;
 import com.example.Alpinia.API.objects.devices.LightsDialog;
 import com.example.Alpinia.API.objects.devices.RefrigeratorDialog;
 import com.example.Alpinia.API.objects.devices.SpeakerDialog;
@@ -70,6 +71,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                 else if(devices.get(position).getType().getId().equals("ofglvd9gqx8yfl3l")) {
                      intent[0] = new Intent(context, VacuumDialog.class);
                 }
+                else if(devices.get(position).getType().getId().equals("dbrlsh7o5sn8ur4i")) {
+                    intent[0] = new Intent(context, FaucetDialog.class);
+                }
+                else
+                    return;
+
 
                 intent[0].putExtra("deviceId",devices.get(position).getId());
                 intent[0].putExtra("deviceName",devices.get(position).getName());

@@ -44,7 +44,7 @@ public class VacuumDialog extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vaccum_card);
-        vacuumName = findViewById(R.id.open_close_switch_faucet);
+        vacuumName = findViewById(R.id.fauce_name);
         vacuumDetails = findViewById(R.id.vacuum_details);
         dockButton = findViewById(R.id.dock_button);
         setModeButton = findViewById(R.id.mode_button);
