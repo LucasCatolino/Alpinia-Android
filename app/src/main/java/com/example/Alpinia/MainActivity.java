@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     //Asignar las funciones al overflow
     public boolean onOptionsItemSelected (MenuItem item) {
         int id= item.getItemId();
+
         if (id== R.id.overflow_refresh) {
 
             Toast.makeText(getApplicationContext(), R.string.toast_Refresh, Toast.LENGTH_SHORT).show();
