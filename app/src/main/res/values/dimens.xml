@@ -11,4 +11,5 @@
     <dimen name="card_spacing">15dp</dimen>
     <dimen name="cardCornerRadius">15dp</dimen>
     <dimen name="cardElevation">10dp</dimen>
+    <dimen name="text_empty_view">18dp</dimen>
 </resources>

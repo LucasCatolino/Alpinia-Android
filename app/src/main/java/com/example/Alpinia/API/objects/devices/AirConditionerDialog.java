@@ -66,7 +66,7 @@ public class AirConditionerDialog extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ac_card);
+        setContentView(R.layout.air_conditioner_card);
         context = (Context) this;
         api = ApiClient.getInstance();
         deviceId = getIntent().getStringExtra("deviceId");

@@ -3,6 +3,8 @@ package com.example.Alpinia;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ public class DeviceActivity extends AppCompatActivity {
     Context context;
     private static String roomId; //agrego private static
     RecyclerView recyclerView;
+    TextView noDevices;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class DeviceActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_room);
         recyclerView = (RecyclerView) findViewById(R.id.rv_devices);
+        noDevices = (TextView) findViewById(R.id.no_devices);
 
         context = this;
         if(getIntent().hasExtra("roomId")) {
@@ -58,9 +62,10 @@ public class DeviceActivity extends AppCompatActivity {
 
                     Result<List<Device>> result = response.body();
                     devicesList = result.getResult();
-
+                    if (devicesList.size()!= 0) {
+                        noDevices.setVisibility(View.GONE);
+                    }
                     if(devicesList != null){
-
                         DeviceAdapter myAdapter = new DeviceAdapter(context,devicesList);
                         recyclerView.setAdapter(myAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(context));}

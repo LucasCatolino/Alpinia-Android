@@ -16,6 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <EditText
         android:id="@+id/newHome"
         android:layout_width="0dp"
@@ -32,5 +34,18 @@
         android:text="@string/addButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/no_homes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_homes"
+        android:textSize="@dimen/text_empty_view"
+        android:textColor="@color/title_text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/newHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/homeList"
+        app:layout_constraintTop_toTopOf="@+id/homeList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

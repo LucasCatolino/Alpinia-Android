@@ -33,7 +33,7 @@ public class RefrigeratorDialog extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         context = (Context) this;
-        setContentView(R.layout.refrigerator_card);
+        setContentView(R.layout.ref_card);
         // instancio la API
         api = ApiClient.getInstance();
         deviceId = getIntent().getStringExtra("deviceId");

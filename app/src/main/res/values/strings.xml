@@ -4,7 +4,8 @@
     <string name="title_home" translatable="false">Home</string>
     <string name="description_home" translatable="false">Tap to see rooms inside</string>
     <string name="description_room" translatable="false">Tap to see devices inside</string>
-
+    <string name="no_homes" translatable="false">You do not have homes registered</string>
+    <string name="no_devices" translatable="false">You do not have devices associated with this room </string>
     <string name="title_dashboard">Routines</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_routines">Routines</string>
@@ -96,7 +97,7 @@
         <item>mop</item>
     </string-array>
 
-    <string name="fridge_temperature">Temperature of the fridge</string>
+    <string name="fridge_temperature">Fridge\nTemperature</string>
     <string-array name="fridge_temperature_options">
         <item>2</item>
         <item>3</item>
@@ -107,7 +108,7 @@
         <item>8</item>
     </string-array>
 
-    <string name="freezer_temperature">Temperature of the freezer</string>
+    <string name="freezer_temperature">Freezer\nTemperature</string>
     <string-array name="freezer_temperature_options">
         <item>-20</item>
         <item>-19</item>
@@ -159,7 +160,7 @@
         <item>38</item>
     </string-array>
 
-    <string name="ac_vertical">Vertical Blade</string>
+    <string name="ac_vertical">Vertical\nSwings</string>
     <string-array name="ac_vertical_options">
          <item>Default</item>
         <item>22</item>
@@ -168,7 +169,7 @@
         <item>90</item>
     </string-array>
 
-    <string name="ac_horizontal">Horizontal Blade</string>
+    <string name="ac_horizontal">Horizontal\nSwings</string>
     <string-array name="ac_horizontal_options">
         <item>Default</item>
         <item>-90</item>
@@ -178,7 +179,7 @@
         <item>90</item>
     </string-array>
 
-    <string name="ac_speed">Speed Percentage</string>
+    <string name="ac_speed">Speed\nPercentage</string>
     <string-array name="ac_speed">
        <item>Default</item>
         <item>25</item>
@@ -194,7 +195,7 @@
 
     <!-- Manejo de errores -->
     <string name="error_message">Something went wrong: %1$s [%2$d]</string>
-    <string name="room_activity">Room</string>
+    <string name="room_activity">Devices</string>
     <string name="settings_IPAddress_active">Currently connected to: </string>
     <string name="settings_IPAddress_button">Connect</string>
     <string name="toast_createRoom">Creating room</string>

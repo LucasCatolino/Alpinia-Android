@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ public class HomesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Home> homesList;
     Context context = this;
-
+    TextView noHomes;
     Button addHomeBttn;
     EditText newHomeName;
     @Override
@@ -45,6 +46,7 @@ public class HomesActivity extends AppCompatActivity {
         addHomeBttn = findViewById(R.id.btnAddHome);
         newHomeName = findViewById(R.id.newHome);
         recyclerView = findViewById(R.id.homeList);
+        noHomes = (TextView) findViewById(R.id.no_homes);
         updateView();
         if (addHomeBttn != null) {
             addHomeBttn.setOnClickListener(new View.OnClickListener(){
@@ -90,6 +92,9 @@ public class HomesActivity extends AppCompatActivity {
                     Result<List<Home>> result = response.body();
                     System.out.println(result.getResult().toString());
                     homesList = result.getResult();
+                    if (homesList.size()!= 0) {
+                        noHomes.setVisibility(View.GONE);
+                    }
                     System.out.println(homesList.toString());
                     if(homesList != null){
                         HomesAdapter myAdapter = new HomesAdapter(context,homesList);
