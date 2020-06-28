@@ -2,6 +2,9 @@
     <string name="app_name" translatable="false">AlpiniaTech</string>
 
     <string name="title_home" translatable="false">Home</string>
+    <string name="description_home" translatable="false">Tap to see rooms inside</string>
+    <string name="description_room" translatable="false">Tap to see devices inside</string>
+
     <string name="title_dashboard">Routines</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_routines">Routines</string>
@@ -38,7 +41,7 @@
     <string name="ligth_brightness">Brightness</string>
 
     <!-- Door -->
-    <string name="door_title">Door</string>
+    <string name="door_title">DOOR</string>
     <string name="door_open">Open</string>
     <string name="door_close">Close</string>
     <string name="door_lock">Locked</string>

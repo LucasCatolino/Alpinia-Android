@@ -1,47 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/dev_card"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginLeft="@dimen/card_spacing"
+android:layout_marginTop="@dimen/card_spacing"
+android:layout_marginRight="@dimen/card_spacing"
+app:cardBackgroundColor="@color/card_back"
+app:cardCornerRadius="@dimen/cardCornerRadius"
+app:cardElevation="@dimen/cardElevation">
+
+
+
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
-
-
-    <TextView
-        android:id="@+id/routine_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Routine name"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toEndOf="@+id/routineImg"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <ImageView
         android:id="@+id/routineImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home_black_24dp" />
+        app:srcCompat="@drawable/ic_routine_black" />
+
+    <TextView
+        android:id="@+id/routine_name"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="-28dp"
+        android:text="Routine Name"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/title_text"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/routine_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/execute"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/description_home"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/description_text"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routine_name" />
+        app:layout_constraintStart_toEndOf="@+id/homeImg"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/execute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/execute_button"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="-54dp"
         android:text="Execute"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/button_action"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>

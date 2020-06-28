@@ -45,27 +45,45 @@
         android:id="@+id/song_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="36dp"
         android:text="SongDetails"
+        android:textSize="@dimen/text_devices"
+        android:textColor="@color/title_text"
         app:layout_constraintBottom_toTopOf="@+id/play_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/speaker_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SpeakerName"
+        android:text="SPEAKER"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/title_devices_name"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/song_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
 
     <SeekBar
         android:id="@+id/progress_bar"
         android:layout_width="352dp"
         android:layout_height="15dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +106,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volume"
+        android:textSize="@dimen/text_devices"
+        android:textColor="@color/title_text"
         app:layout_constraintBottom_toTopOf="@+id/volume_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +118,9 @@
         android:id="@+id/onoff_switch"
         android:layout_width="54dp"
         android:layout_height="29dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

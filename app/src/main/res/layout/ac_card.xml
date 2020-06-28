@@ -6,12 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
         android:id="@+id/text_speed_ac"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/ac_speed"
+        android:textSize="@dimen/text_devices"
+        android:textColor="@color/title_text"
         app:layout_constraintEnd_toStartOf="@+id/spin_speed_ac"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,19 +24,26 @@
         android:id="@+id/text_horizontal_ac"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:text="@string/ac_horizontal"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_devices"
+        app:layout_constraintBottom_toTopOf="@+id/spin_speed_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_horizontal_ac"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_vertical_ac" />
+        app:layout_constraintTop_toBottomOf="@+id/text_vertical_ac"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/text_vertical_ac"
         android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/ac_vertical"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_devices"
+        app:layout_constraintBottom_toTopOf="@+id/spin_horizontal_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_vertical_ac"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +65,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="50dp"
         android:entries="@array/ac_horizontal_options"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toEndOf="@+id/text_vertical_ac"
@@ -75,7 +86,7 @@
         android:id="@+id/spin_temperature_ac"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:entries="@array/ac_temperature_options"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,10 +99,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/ac_title"
+        android:text="AIR CONDITIONER"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/title_devices_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <Switch
         android:id="@+id/open_close_ac"
@@ -111,6 +127,9 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="20dp"
         android:text="@string/ac_mode"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_devices"
+        app:layout_constraintBottom_toTopOf="@+id/spin_temperature_ac"
         app:layout_constraintEnd_toStartOf="@+id/spin_mode_ac"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,8 +139,10 @@
         android:id="@+id/text_temperature_ac"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="52dp"
         android:text="@string/ac_temperature"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_devices"
         app:layout_constraintEnd_toStartOf="@+id/spin_temperature_ac"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,4 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="title_text">22dp</dimen>
+    <dimen name="title_devices_name">30dp</dimen>
+    <dimen name="text_devices">18dp</dimen>
+    <dimen name="button_action">16dp</dimen>
+    <dimen name="description_text">14dp</dimen>
+    <dimen name="card_spacing">15dp</dimen>
+    <dimen name="cardCornerRadius">15dp</dimen>
+    <dimen name="cardElevation">10dp</dimen>
 </resources>
