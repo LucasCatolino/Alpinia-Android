@@ -1,5 +1,14 @@
 package com.example.Alpinia.API.objects.devices;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 
 import com.example.Alpinia.API.ApiClient;
 import com.example.Alpinia.API.objects.Error;
@@ -21,9 +32,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+import com.example.Alpinia.HomesActivity;
 
 public class SpeakerDialog extends AppCompatActivity {
+
+    private static final String CHANNEL_ID = "SpeakerNotifications";
+    private static final int MY_NOTIFICATION_ID = 6;
+
     String deviceId;
     String deviceName;
     SpeakerState state;
@@ -291,7 +306,8 @@ public class SpeakerDialog extends AppCompatActivity {
                     }
                     else if(state.isPlaying()){
                         //cambiar de imagen acá
-                        playButton.setImageResource(R.drawable.ic_reloj);
+                        playButton.setImageResource(R.drawable.ic_pause);
+                        speakerSendNotification();
                     }
 
 
@@ -354,6 +370,70 @@ public class SpeakerDialog extends AppCompatActivity {
                 }
             }
         }
+    }
+
+//Notificaciones
+    private void speakerSendNotification(){
+        if(state.getSong() != null) {
+            sendNotification(getIntent().getStringExtra("deviceName"), state.getSong().getTitle() + ": " + state.getSong().getArtist());
+        } else {
+            sendNotification(getIntent().getStringExtra("deviceName"), getString(R.string.speaker_playing_notification));
+        }
+    }
+
+    private void sendNotification(String title, String text){
+        CreateNotificationChannel();
+        ShowNotification(title, text);
+    }
+    private void CreateNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notifications";
+            String description = "Notifications Description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+            channel.enableVibration(true);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void ShowNotification(String title, String text) {
+        // Create the intent to start Activity when notification in action bar is
+        // clicked.
+        Intent notificationIntent = new Intent(SpeakerDialog.this, HomesActivity.class);
+
+        // The stack builder object will contain an artificial back stack for the
+        // started Activity.
+        // This ensures that navigating backward from the Activity leads out of
+        // your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(HomesActivity.class);
+        stackBuilder.addNextIntent(notificationIntent);
+        // Create the pending intent granting the Operating System to launch activity
+        // when notification in action bar is clicked.
+        final PendingIntent contentIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(SpeakerDialog.this, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), android.R.drawable.presence_audio_online))
+                .setSmallIcon(android.R.drawable.presence_audio_online)
+                .setAutoCancel(true)
+                .setContentIntent(contentIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(MY_NOTIFICATION_ID, builder.build());
     }
 
 }

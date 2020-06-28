@@ -207,6 +207,12 @@
     <string name="doorDialog">Door</string>
     <string name="SpeakerDialog">Speaker</string>
     <string name="AirConditionerDialog">Air conditioner</string>
+    <string name="door_locked_notification">Door locked</string>
+    <string name="door_unlocked_notification">Door unlocked</string>
+    <string name="lights_on_notification">Lights on</string>
+    <string name="lights_off_notification">Lights off</string>
+    <string name="speaker_playing_notification">Playing</string>
+    <string name="air_conditioner_notification">Air conditioner on</string>
 
 
 </resources>

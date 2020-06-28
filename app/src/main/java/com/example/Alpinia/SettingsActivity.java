@@ -1,6 +1,8 @@
 package com.example.Alpinia;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +69,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
         private void switchNotifications(Boolean isChecked) {
+            Intent i = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            i.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+            startActivity(i);
             //TODO
         }
 
