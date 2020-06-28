@@ -68,6 +68,21 @@
     <string name="doorDialog">Puerta</string>
     <string name="SpeakerDialog">Parlante</string>
     <string name="AirConditionerDialog">Aire acondicionado</string>
+    <string name="door_locked_notification">Puerta loqueada</string>
+    <string name="door_unlocked_notification">Puerta desbloqueada</string>
+    <string name="lights_on_notification">Luces prendidas</string>
+    <string name="lights_off_notification">Luces apagadas</string>
+    <string name="speaker_playing_notification">Reproduciendo</string>
+    <string name="air_conditioner_notification">Aire acondicionado prendido</string>
+    <string name="settings_Notifications_button">Administrar</string>
+    <string name="channelLights_name">Notificaciones sobre luces</string>
+    <string name="channelLights_description">Administrar notificaciones para prendido y apagado de luces</string>
+    <string name="channelDoor_description">Administrar notificaciones para bloqueo y desbloqueo de puertas</string>
+    <string name="channelDoor_name">Notificaciones sobre puertas</string>
+    <string name="channelAirConditioner_description">Administrar notificaciones para prendido de aires acondicionados</string>
+    <string name="channelAirConditioner_name">Notificaciones sobre aires acondicionados</string>
+    <string name="channelSpeaker_description">Administrar notificaciones para reproducción de musica</string>
+    <string name="channelSpeaker_name">Administrar notificaciones sobre parlantes</string>
 
 
 </resources>

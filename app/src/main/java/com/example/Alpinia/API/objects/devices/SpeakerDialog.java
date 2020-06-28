@@ -389,8 +389,8 @@ public class SpeakerDialog extends AppCompatActivity {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Notifications";
-            String description = "Notifications Description";
+            CharSequence name = getString(R.string.channelSpeaker_name);
+            String description = getString(R.string.channelSpeaker_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
@@ -427,8 +427,8 @@ public class SpeakerDialog extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(SpeakerDialog.this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(text)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), android.R.drawable.presence_audio_online))
-                .setSmallIcon(android.R.drawable.presence_audio_online)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_speaker))
+                .setSmallIcon(R.drawable.ic_speaker)
                 .setAutoCancel(true)
                 .setContentIntent(contentIntent);
 

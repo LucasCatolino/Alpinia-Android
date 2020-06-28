@@ -213,6 +213,15 @@
     <string name="lights_off_notification">Lights off</string>
     <string name="speaker_playing_notification">Playing</string>
     <string name="air_conditioner_notification">Air conditioner on</string>
+    <string name="settings_Notifications_button">Manage</string>
+    <string name="channelLights_name">Lights notifications</string>
+    <string name="channelLights_description">Manage on/off notifications</string>
+    <string name="channelDoor_name">Door notifications</string>
+    <string name="channelDoor_description">Manage lock/unlock notifications</string>
+    <string name="channelAirConditioner_description">Manage temperature notifications</string>
+    <string name="channelAirConditioner_name">Air conditioner notifications</string>
+    <string name="channelSpeaker_description">Manage speaker notifications</string>
+    <string name="channelSpeaker_name">Speaker notifications</string>
 
 
 </resources>

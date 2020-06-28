@@ -332,8 +332,8 @@ public class AirConditionerDialog extends AppCompatActivity {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Air conditiones";
-            String description = "Notifications Description";
+            CharSequence name = getString(R.string.channelAirConditioner_name);
+            String description = getString(R.string.channelAirConditioner_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
@@ -370,8 +370,8 @@ public class AirConditionerDialog extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(AirConditionerDialog.this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(text)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), android.R.drawable.stat_sys_download_done))
-                .setSmallIcon(android.R.drawable.stat_sys_download_done)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_ac))
+                .setSmallIcon(R.drawable.ic_ac)
                 .setAutoCancel(true)
                 .setContentIntent(contentIntent);
 

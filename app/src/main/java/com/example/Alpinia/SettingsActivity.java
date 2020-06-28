@@ -1,6 +1,7 @@
 package com.example.Alpinia;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -19,10 +20,11 @@ import com.example.Alpinia.API.ApiClient;
 import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Switch switchNotifications;
+
     EditText newIPAddress;
     TextView textViewIP;
     private Button buttonApply;
+    private Button buttonManageNotifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,22 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        switchNotifications = (Switch) findViewById(R.id.switch1);
+        buttonManageNotifications = (Button) findViewById(R.id.btnSaveChangesOnNotifications);
         newIPAddress = (EditText) findViewById(R.id.settings_IPAddress);
         buttonApply = (Button) findViewById(R.id.btnSaveChangesOnIP);
         textViewIP = (TextView) findViewById((R.id.textViewIP));
 
+
         textViewIP.setText(ApiClient.getInstance().getBaseURL());
+
+        if (buttonManageNotifications != null) {
+            buttonManageNotifications.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    manageNotifications();
+                }
+            });
+        }
 
         if(newIPAddress != null) {
             newIPAddress.setOnClickListener(new View.OnClickListener() {
@@ -55,20 +67,13 @@ public class SettingsActivity extends AppCompatActivity {
             });
         }
 
-        if (switchNotifications != null) {
-            switchNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        switchNotifications(isChecked);
-                    } else {
-                        switchNotifications(isChecked);
-                    }
-                }
-            });
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            buttonManageNotifications.setEnabled(false);
         }
+
     }
 
-        private void switchNotifications(Boolean isChecked) {
+        private void manageNotifications() {
             Intent i = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
             i.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
             startActivity(i);
