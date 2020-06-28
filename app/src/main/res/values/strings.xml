@@ -62,9 +62,11 @@
         <item>kl</item>
     </string-array>
     <string name="start_dispensing" translatable="false">Start</string>
+    <string name = "started_dispensing">Dispensing started!</string>
     <string name="cancel_dispensing">Cancel</string>
     <string name="dispense_exactly">Dispense automatically</string>
     <string name="stop_dispensing">Stop Dispensing</string>
+    <string name ="error_dispensing">The number must be between 1 and 100!</string>
 
 
     <!-- Parlante -->

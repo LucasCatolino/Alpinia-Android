@@ -151,6 +151,8 @@ public class SpeakerDialog extends AppCompatActivity {
             public void onResponse(Call<Result<Integer>> call, Response<Result<Integer>> response) {
                 if(response.isSuccessful()){
                     updateState();
+                    progressThread = new ProgressThread(getSeconds(state.getSong().getDuration())-getSeconds(state.getSong().getProgress()));
+                    progressThread.start();
                 }
                 else{
                     handleError(response);
@@ -170,6 +172,8 @@ public class SpeakerDialog extends AppCompatActivity {
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if(response.isSuccessful()){
                     updateState();
+                    progressThread = new ProgressThread(getSeconds(state.getSong().getDuration())-getSeconds(state.getSong().getProgress()));
+                    progressThread.start();
                 }
                 else{
                     handleError(response);
@@ -189,6 +193,8 @@ public class SpeakerDialog extends AppCompatActivity {
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if(response.isSuccessful()){
                     updateState();
+                    progressThread = new ProgressThread(getSeconds(state.getSong().getDuration())-getSeconds(state.getSong().getProgress()));
+                    progressThread.start();
                 }
                 else{
                     handleError(response);
@@ -208,6 +214,7 @@ public class SpeakerDialog extends AppCompatActivity {
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if(response.isSuccessful()){
                     updateState();
+
                 }
                 else{
                     handleError(response);

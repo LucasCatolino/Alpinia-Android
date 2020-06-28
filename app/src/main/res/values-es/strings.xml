@@ -58,6 +58,9 @@
     <string name="addButton">Agregar</string>
     <string name="newRoom">Nueva habitación</string>
     <string name="toast_IPAddressMissing">Dirección IP inválida</string>
+    <string name ="error_dispensing">El número tiene que estar entre 1 y 100!</string>
+    <string name ="started_dispensing">Se ha comenzado a dispensar!</string>
+
 
     <string name="ac_title">Aire Acondicionado</string>
     <string name="ac_mode">Modo</string>

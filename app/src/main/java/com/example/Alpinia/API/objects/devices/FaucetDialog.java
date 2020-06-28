@@ -1,5 +1,6 @@
 package com.example.Alpinia.API.objects.devices;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -33,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.lang.Thread.sleep;
+
 public class FaucetDialog extends AppCompatActivity {
     EditText toDispense;
     Button startButton;
@@ -45,6 +48,7 @@ public class FaucetDialog extends AppCompatActivity {
     String deviceId;
     String deviceName;
     ArrayAdapter<CharSequence> units;
+    Context context = this;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +75,7 @@ public class FaucetDialog extends AppCompatActivity {
                     startDispensing(Integer.valueOf(toDispense.getText().toString()));
                 }
                 else{
-                    toDispense.setError("Must be a number between 1 and 100!");
+                    toDispense.setError(getResources().getString(R.string.error_dispensing));
                 }
 
             }
@@ -129,12 +133,33 @@ public class FaucetDialog extends AppCompatActivity {
         });
     }
 
+    public class ProgressThread extends Thread{
+        int seconds;
+        ProgressThread(int secs){
+            seconds = secs;
+        }
+        @Override
+        public void run(){
+            for(int i = 0; i<seconds; i++){
+                try {
+                    Thread.sleep(1000);
+                    updateState();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void startDispensing(Integer amount) {
         api.dispenseExactAmount(deviceId, amount, unitSpinner.getSelectedItem().toString(), new Callback<Result<Boolean>>() {
             @Override
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if (response.isSuccessful()) {
+                    Toast.makeText(context,getResources().getString(R.string.start_dispensing),Toast.LENGTH_LONG).show();
                     updateState();
+                    new ProgressThread(200).start();
+
                 } else {
                     handleError(response);
                 }
@@ -156,7 +181,7 @@ public class FaucetDialog extends AppCompatActivity {
                     state = result.getResult();
 
                     onOffSwitch.setChecked(state.isOpen());
-                    toggleButtons(state.isOpen());
+                    toggleButtons(!state.isOpen());
                 } else
                     handleError(response);
             }
