@@ -19,6 +19,7 @@ import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.DeviceActivity;
 import com.example.Alpinia.DeviceAdapter;
 import com.example.Alpinia.HomesAdapter;
+import com.example.Alpinia.MainActivity;
 import com.example.Alpinia.R;
 
 import java.util.List;
@@ -54,11 +55,8 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
             public void onResponse(Call<Result<List<Device>>> call, Response<Result<List<Device>>> response) {
                 if(response.isSuccessful()){
                     Result<List<Device>> result = response.body();
-                    if(result.getResult() != null){
-                        DeviceAdapter myAdapter = new DeviceAdapter(context,result.getResult());
-                        holder.devices.setAdapter(myAdapter);
-                        holder.devices.setLayoutManager(new LinearLayoutManager(context));
-                    }
+                    strBuilder.append("Devices: " + result.getResult().size());
+                    holder.devices.setText(strBuilder.toString());
                 }
             }
 
@@ -67,8 +65,14 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
 
             }
         });
-
-        
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DeviceActivity.class);
+                intent.putExtra("roomId",rooms.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -79,12 +83,12 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
     public class RoomViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView roomIcon;
-        RecyclerView devices;
+        TextView devices;
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomIcon = itemView.findViewById(R.id.roomImg);
             name = itemView.findViewById(R.id.tvRoomName);
-            devices = itemView.findViewById(R.id.recyclerdevices);
+            devices = itemView.findViewById(R.id.device_amount);
         }
     }
 }
