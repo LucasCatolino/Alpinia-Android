@@ -1,6 +1,7 @@
 package com.example.Alpinia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.Alpinia.API.ApiClient;
 import com.example.Alpinia.API.objects.Device;
 import com.example.Alpinia.API.objects.Error;
 import com.example.Alpinia.API.objects.Result;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class DeviceActivity extends AppCompatActivity {
     private static String roomId; //agrego private static
     RecyclerView recyclerView;
     TextView noDevices;
+    FloatingActionButton floatButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class DeviceActivity extends AppCompatActivity {
         }
 //        else
 //            roomId = null;
+        floatButton = findViewById(R.id.floatingActionButton2);
+        floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,AddDeviceActivity.class);
+                intent.putExtra("roomId",roomId);
+                context.startActivity(intent);
+            }
+        });
 
         getRoomDevices();
 

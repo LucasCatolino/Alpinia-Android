@@ -80,6 +80,7 @@ public interface ApiService {
 
     //--------------------------- DEVICES -----------------------------
 
+
     @POST("devices")
     @Headers("Content-Type: application/json")
     Call<Result<Device>> addDevice(@Body Device device);

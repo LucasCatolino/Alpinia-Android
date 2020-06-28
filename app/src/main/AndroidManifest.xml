@@ -87,6 +87,11 @@
             android:parentActivityName=".DeviceActivity">
         </activity>
 
+        <activity android:name="com.example.Alpinia.AddDeviceActivity"
+            android:label="@string/addButton"
+            android:parentActivityName=".DeviceActivity">
+        </activity>
+
     </application>
 
 </manifest>

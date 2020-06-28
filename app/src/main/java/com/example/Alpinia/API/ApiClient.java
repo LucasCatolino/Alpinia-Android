@@ -145,6 +145,7 @@ public class ApiClient {
     //--------------------------DEVICES-------------------------------------------
 
 
+
     public Call<Result<Boolean>> addDeviceToRoom(String roomId,  String deviceId, Callback<Result<Boolean>> callback){
 
         Call<Result<Boolean>> call = this.service.addDeviceToRoom(roomId, deviceId);

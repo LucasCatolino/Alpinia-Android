@@ -190,6 +190,16 @@
         <item>100</item>
     </string-array>
 
+    <string-array name="device_types">
+        <item>Lights</item>
+        <item>Vacuum</item>
+        <item>Speaker</item>
+        <item>Fridge</item>
+        <item>Air Conditioner</item>
+        <item>Faucet</item>
+        <item>Door</item>
+    </string-array>
+
 
 
 

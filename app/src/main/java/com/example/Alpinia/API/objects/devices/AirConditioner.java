@@ -11,8 +11,8 @@ public class AirConditioner extends Device {
     @Expose
     private AirConditionerState state;
 
-    public AirConditioner(String name, DeviceType type) {
+    public AirConditioner(String name) {
         this.name = name;
-        this.type = type;
+        this.type = new DeviceType("li6cbv5sdlatti0j");
     }
 }

@@ -11,8 +11,8 @@ public class Faucet extends Device {
     @Expose
     private FaucetState state;
 
-    public Faucet(String name, DeviceType type) {
+    public Faucet(String name) {
         this.name = name;
-        this.type = type;
+        this.type = new DeviceType("dbrlsh7o5sn8ur4i");
     }
 }

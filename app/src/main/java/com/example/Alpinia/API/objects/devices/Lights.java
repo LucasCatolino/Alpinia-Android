@@ -13,8 +13,8 @@ public class Lights extends Device {
     @Expose
     private LightsState state;
 
-    public Lights(String name, DeviceType type) {
+    public Lights(String name) {
         this.name = name;
-        this.type = type;
+        this.type = new DeviceType("go46xmbqeomjrsjr");
     }
 }
