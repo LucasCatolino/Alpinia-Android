@@ -55,8 +55,6 @@ public class DashboardFragment extends Fragment {
 
     }
 
-
-
     //Mostrar el overflow
     public boolean onCreateOptionsMenu(Menu menu) {
         getActivity().getMenuInflater().inflate(R.menu.overflow, menu);

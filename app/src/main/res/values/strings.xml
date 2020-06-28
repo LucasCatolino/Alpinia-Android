@@ -225,6 +225,7 @@
     <string name="channelAirConditioner_name">Air conditioner notifications</string>
     <string name="channelSpeaker_description">Manage speaker notifications</string>
     <string name="channelSpeaker_name">Speaker notifications</string>
+    <string name="no_rooms">You do not have any room registered in this home</string>
 
 
 </resources>

@@ -83,6 +83,7 @@
     <string name="channelAirConditioner_name">Notificaciones sobre aires acondicionados</string>
     <string name="channelSpeaker_description">Administrar notificaciones para reproducción de musica</string>
     <string name="channelSpeaker_name">Administrar notificaciones sobre parlantes</string>
+    <string name="no_rooms">No tiene habitaciones registradas en esta casa</string>
 
 
 </resources>

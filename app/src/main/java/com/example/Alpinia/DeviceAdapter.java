@@ -3,6 +3,9 @@ package com.example.Alpinia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.objects.Device;
-import com.example.Alpinia.API.objects.devices.AirConditioner;
 import com.example.Alpinia.API.objects.devices.AirConditionerDialog;
 import com.example.Alpinia.API.objects.devices.DoorDialog;
 import com.example.Alpinia.API.objects.devices.FaucetDialog;
@@ -45,6 +47,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     public void onBindViewHolder(@NonNull DeviceAdapter.DeviceViewHolder holder, int position) {
         final Intent[] intent = new Intent[1];
         holder.name.setText(devices.get(position).getName());
+        iconManager(holder, devices.get(position).getType().getId());
+        //holder.deviceIcon.setImageDrawable(iconManager(devices.get(position).getType().getId()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +88,33 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
 
             }
         });
+    }
+
+    private void iconManager(DeviceViewHolder holder, String id) {
+        switch (id){
+            case "lsf78ly0eqrjbz91":
+                holder.deviceIcon.setImageResource(R.drawable.ic_door_black);
+                break;
+            case "go46xmbqeomjrsjr":
+                holder.deviceIcon.setImageResource(R.drawable.ic_light_black);
+                break;
+            case "rnizejqr2di0okho":
+                holder.deviceIcon.setImageResource(R.drawable.ic_refrigerator);
+                break;
+            case "c89b94e8581855bc":
+                holder.deviceIcon.setImageResource(R.drawable.ic_speaker_black);
+                break;
+            case "li6cbv5sdlatti0j":
+                holder.deviceIcon.setImageResource(R.drawable.ic_ac_black);
+                break;
+            case "ofglvd9gqx8yfl3l":
+                holder.deviceIcon.setImageResource(R.drawable.ic_vaccum_black);
+                break;
+            case "dbrlsh7o5sn8ur4i":
+                holder.deviceIcon.setImageResource(R.drawable.ic_faucet_black);
+                break;
+            default: holder.deviceIcon.setImageResource(R.drawable.ic_default_device_black);
+        }
     }
 
     @Override

@@ -25,6 +25,7 @@
         android:focusable="false"
         android:focusableInTouchMode="true"
         android:hint="@string/newRoom"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/btnAddRoom"
@@ -36,19 +37,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="4dp"
-        android:text="You do not have any room register in this home"
+        android:text=""
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/roomList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/background"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/newRoom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,9 +59,14 @@
         android:id="@+id/no_rooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/roomList"
-        app:layout_constraintStart_toStartOf="@+id/roomList"
-        app:layout_constraintTop_toTopOf="@+id/roomList" />
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="326dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="386dp"
+        android:text="@string/no_rooms"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

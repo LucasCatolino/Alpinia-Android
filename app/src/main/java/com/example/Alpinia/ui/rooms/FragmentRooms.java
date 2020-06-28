@@ -50,6 +50,7 @@ public class FragmentRooms extends Fragment {
     Context context;
     Button addRoomBttn;
     EditText newRoomName;
+    TextView noRooms;
     private static String homeId;
 
 
@@ -67,6 +68,7 @@ public class FragmentRooms extends Fragment {
         addRoomBttn = (Button) vista.findViewById(R.id.btnAddRoom);
         newRoomName = (EditText) vista.findViewById(R.id.newRoom);
         recyclerView = (RecyclerView) vista.findViewById(R.id.roomList);
+        noRooms = (TextView) vista.findViewById(R.id.no_rooms);
 
         updateView();
 
@@ -142,14 +144,19 @@ public class FragmentRooms extends Fragment {
         ApiClient.getInstance().getHomeRooms(homeId, new Callback<Result<List<Room>>>() {
             @Override
             public void onResponse(@NonNull Call<Result<List<Room>>> call, @NonNull Response<Result<List<Room>>> response) {
+
                 if (response.isSuccessful()) {
                     Result<List<Room>> result = response.body();
                     roomsList = result.getResult();
+
+                    if (roomsList.size()!= 0) {
+                        noRooms.setVisibility(View.GONE);
+                    }
+
                     if(roomsList != null){
                         RoomsAdapter myAdapter = new RoomsAdapter(context,roomsList);
                         recyclerView.setAdapter(myAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(context));}
-
                 } else {
                     handleError(response);
                 }
