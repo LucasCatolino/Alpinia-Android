@@ -128,6 +128,12 @@ public class ApiClient {
         return call;
     }
 
+    public Call<Result<Boolean>> deleteHome(String homeId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.deleteHome(homeId);
+        call.enqueue(callback);
+        return call;
+    }
+
 
     public Call<Result<Boolean>> addRoomToHome(String homeId,  String roomId, Callback<Result<Boolean>> callback){
 
@@ -152,6 +158,11 @@ public class ApiClient {
         return call;
     }
 
+    public Call<Result<Boolean>> deleteDevice(String deviceId, Callback<Result<Boolean>> callback) {
+        Call<Result<Boolean>> call = this.service.deleteDevice(deviceId);
+        call.enqueue(callback);
+        return call;
+    }
 
 
     //-------------------------- ROUTINES -------------------------------------------

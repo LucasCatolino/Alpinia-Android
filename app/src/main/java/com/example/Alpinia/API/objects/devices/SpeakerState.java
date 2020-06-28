@@ -3,8 +3,6 @@ package com.example.Alpinia.API.objects.devices;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class SpeakerState {
     @SerializedName("status")
     @Expose
@@ -41,7 +39,6 @@ public class SpeakerState {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
 
 
     public boolean isPlaying(){

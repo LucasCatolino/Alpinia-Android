@@ -90,12 +90,10 @@ public class HomesActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Result<List<Home>>> call, @NonNull Response<Result<List<Home>>> response) {
                 if (response.isSuccessful()) {
                     Result<List<Home>> result = response.body();
-                    System.out.println(result.getResult().toString());
                     homesList = result.getResult();
                     if (homesList.size()!= 0) {
                         noHomes.setVisibility(View.GONE);
                     }
-                    System.out.println(homesList.toString());
                     if(homesList != null){
                         HomesAdapter myAdapter = new HomesAdapter(context,homesList);
                         recyclerView.setAdapter(myAdapter);

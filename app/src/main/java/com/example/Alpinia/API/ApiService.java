@@ -92,6 +92,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     Call<Result<Boolean>> addDeviceToRoom(@Path("roomId")String roomId,@Path("deviceId") String deviceId);
 
+    @DELETE("devices/{deviceId}")
+    Call<Result<Boolean>> deleteDevice(@Path("deviceId") String deviceId);
 
 
     //--------------------------- ROUTINES -----------------------------

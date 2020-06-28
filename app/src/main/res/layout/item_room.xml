@@ -69,6 +69,25 @@ app:cardElevation="@dimen/cardElevation">
         app:layout_constraintTop_toTopOf="parent" />
 
 
+
+    <TextView
+        android:id="@+id/descrroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/description_room"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/description_text"
+        android:textStyle="italic"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homeImg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </LinearLayout>
 </androidx.cardview.widget.CardView>
 

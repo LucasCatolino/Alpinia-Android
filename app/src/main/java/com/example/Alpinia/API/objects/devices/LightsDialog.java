@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ public class LightsDialog extends AppCompatActivity {
     private String deviceId;
     private Switch switchOnOff;
     private Button colorChange;
+    TextView name;
     LightsState state;
     SeekBar brightnessBar;
     int mDefaultColor;
@@ -57,6 +59,8 @@ public class LightsDialog extends AppCompatActivity {
         context = (Context) this;
         setContentView(R.layout.light_card);
         api = ApiClient.getInstance();
+        name = findViewById(R.id.lamp_dialog_title);
+        name.setText(getIntent().getStringExtra("deviceName"));
         deviceId = getIntent().getStringExtra("deviceId");
         mDefaultColor = ContextCompat.getColor(this,R.color.colorPrimary);
         switchOnOff = findViewById(R.id.lights_switch);

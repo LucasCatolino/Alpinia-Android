@@ -37,7 +37,7 @@
     <string name="result">Result: %1$s</string>
 
 
-    <!-- Ligth -->
+    <!-- Light -->
     <string name="light_title">Lights</string>
     <string name="ligth_brightness">Brightness</string>
 
@@ -212,6 +212,9 @@
     <string name="toast_IPAddressMissing">Invalid IP address</string>
     <string name="doorDialog">Door</string>
     <string name="SpeakerDialog">Speaker</string>
+    <string name="VacuumDialog">Vacuum</string>
+    <string name="description_device">Tap to edit device</string>
+    <string name="alertwarn">Are you sure you want to delete this item?</string>
     <string name="AirConditionerDialog">Air conditioner</string>
     <string name="door_locked_notification">Door locked</string>
     <string name="door_unlocked_notification">Door unlocked</string>

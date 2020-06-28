@@ -61,6 +61,7 @@ public class Device {
         this.meta = meta;
     }
 
+
     @Override
     public String toString() {
         return name + ": " + type.getName() + '\n';

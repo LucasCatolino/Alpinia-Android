@@ -61,12 +61,14 @@
     <string name ="error_dispensing">El número tiene que estar entre 1 y 100!</string>
     <string name ="started_dispensing">Se ha comenzado a dispensar!</string>
 
-
+    <string name="VacuumDialog">Aspiradora</string>
     <string name="ac_title">Aire Acondicionado</string>
     <string name="ac_mode">Modo</string>
     <string name="ac_temperature">Temperatura</string>
     <string name="ac_vertical">Aspas Verticales</string>
     <string name="ac_horizontal">Aspas Horizontales</string>
+    <string name="alertwarn">¿Seguro quieres eliminar este elemento?</string>
+    <string name="description_device">Aprete para ver mas sobre el dispositivo</string>
     <string name="ac_speed">Porcentaje de Velocidad</string>
     <string name="doorDialog">Puerta</string>
     <string name="SpeakerDialog">Parlante</string>

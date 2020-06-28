@@ -156,7 +156,7 @@ public class FaucetDialog extends AppCompatActivity {
             @Override
             public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(context,getResources().getString(R.string.start_dispensing),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,getResources().getString(R.string.started_dispensing),Toast.LENGTH_LONG).show();
                     updateState();
                     new ProgressThread(200).start();
 

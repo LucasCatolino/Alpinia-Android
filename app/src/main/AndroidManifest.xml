@@ -74,16 +74,16 @@
             android:parentActivityName=".DeviceActivity">
         </activity>
         <activity android:name=".API.objects.devices.VacuumDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/VacuumDialog"
             android:parentActivityName=".DeviceActivity">
         </activity>
 
         <activity android:name=".API.objects.devices.LightsDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/light_title"
             android:parentActivityName=".DeviceActivity">
         </activity>
         <activity android:name=".API.objects.devices.FaucetDialog"
-            android:label="@string/overflow_settings"
+            android:label="@string/faucet_title"
             android:parentActivityName=".DeviceActivity">
         </activity>
 

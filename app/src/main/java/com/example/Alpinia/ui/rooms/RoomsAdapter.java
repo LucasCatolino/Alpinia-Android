@@ -1,12 +1,16 @@
 package com.example.Alpinia.ui.rooms;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Alpinia.API.ApiClient;
 import com.example.Alpinia.API.objects.Device;
+import com.example.Alpinia.API.objects.Error;
 import com.example.Alpinia.API.objects.Result;
 import com.example.Alpinia.API.objects.Room;
 import com.example.Alpinia.DeviceActivity;
@@ -73,6 +78,46 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
                 context.startActivity(intent);
             }
         });
+        holder.trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setMessage(context.getResources().getString(R.string.alertwarn)).setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ApiClient.getInstance().deleteRoom(rooms.get(position).getId(), new Callback<Result<Boolean>>() {
+                                    @Override
+                                    public void onResponse(Call<Result<Boolean>> call, Response<Result<Boolean>> response) {
+                                        if(response.isSuccessful())
+                                        {
+                                            context.startActivity(new Intent(context, context.getClass()));
+                                        }
+                                        else{
+                                            handleError(response);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Result<Boolean>> call, Throwable t) {
+                                        handleUnexpectedError(t);
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog myAlert = alert.create();
+                alert.setTitle("Delete item");
+                alert.show();
+
+            }
+        });
     }
 
     @Override
@@ -84,11 +129,24 @@ public class RoomsAdapter  extends RecyclerView.Adapter<RoomsAdapter.RoomViewHol
         TextView name;
         ImageView roomIcon;
         TextView devices;
+        ImageView trash;
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomIcon = itemView.findViewById(R.id.roomImg);
             name = itemView.findViewById(R.id.tvRoomName);
             devices = itemView.findViewById(R.id.device_amount);
+            trash = itemView.findViewById(R.id.go_to_rooms);
         }
+    }
+
+    private <T> void handleError(Response<T> response) {
+        Error error = ApiClient.getInstance().getError(response.errorBody());
+        String text = context.getResources().getString(R.string.error_message, error.getDescription().get(0), error.getCode());
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleUnexpectedError(Throwable t) {
+        String LOG_TAG = "App";
+        Log.e(LOG_TAG, t.toString());
     }
 }
