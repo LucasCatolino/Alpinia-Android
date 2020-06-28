@@ -17,12 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Alpinia.API.ApiClient;
 
+import org.w3c.dom.Text;
+
 import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
 
     EditText newIPAddress;
     TextView textViewIP;
+    TextView settings_notifications;
     private Button buttonApply;
     private Button buttonManageNotifications;
 
@@ -36,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         newIPAddress = (EditText) findViewById(R.id.settings_IPAddress);
         buttonApply = (Button) findViewById(R.id.btnSaveChangesOnIP);
         textViewIP = (TextView) findViewById((R.id.textViewIP));
+        settings_notifications = (TextView) findViewById(((R.id.settings_notifications)));
 
 
         textViewIP.setText(ApiClient.getInstance().getBaseURL());
@@ -68,7 +72,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            buttonManageNotifications.setEnabled(false);
+            buttonManageNotifications.setVisibility(View.GONE);
+            settings_notifications.setVisibility(View.GONE);
         }
 
     }
@@ -77,7 +82,6 @@ public class SettingsActivity extends AppCompatActivity {
             Intent i = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
             i.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
             startActivity(i);
-            //TODO
         }
 
         private void changeIPAddress() {
