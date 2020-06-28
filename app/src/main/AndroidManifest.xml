@@ -53,6 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter-->
         </activity>
+
         <activity android:name=".API.objects.devices.DoorDialog"
             android:label="@string/doorDialog"
             android:parentActivityName=".DeviceActivity">

@@ -17,10 +17,12 @@
         android:textSize="@dimen/title_devices_name"
         android:textStyle="bold"
         android:textAlignment="center" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_marginTop="6dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="wrap_content"

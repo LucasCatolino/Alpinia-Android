@@ -6,7 +6,12 @@
     <color name="title_text">#060000</color>
     <color name="card_background">#7A6464</color>
     <color name="card_back">#F2E9E9</color>
-    <color name="execute_button">#05802C</color>
+    <color name="execute_button2">#05802C</color>
+    <color name="execute_button">#08EE51</color>
+    <color name="menu_back">#1E0572</color>
+
+
+
 
 
 </resources>

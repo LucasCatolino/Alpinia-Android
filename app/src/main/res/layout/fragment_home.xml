@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="4dp"
-    android:paddingTop="4dp"
-    android:paddingRight="4dp"
-    android:paddingBottom="4dp"
     tools:context=".ui.rooms.FragmentRooms">
 
     <Button
@@ -24,12 +20,12 @@
         android:id="@+id/newRoom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/newRoom"
-        android:visibility="visible"
         android:clickable="true"
         android:cursorVisible="false"
         android:focusable="false"
         android:focusableInTouchMode="true"
+        android:hint="@string/newRoom"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/btnAddRoom"
         app:layout_constraintHorizontal_bias="1.0"
@@ -40,19 +36,33 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="4dp"
-        android:text="TextView"
+        android:text="You do not have any room register in this home"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/roomList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/background"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/newRoom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/no_rooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/roomList"
+        app:layout_constraintStart_toStartOf="@+id/roomList"
+        app:layout_constraintTop_toTopOf="@+id/roomList" />
 </androidx.constraintlayout.widget.ConstraintLayout>
