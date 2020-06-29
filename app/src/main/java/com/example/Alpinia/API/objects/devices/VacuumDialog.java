@@ -48,7 +48,7 @@ public class VacuumDialog extends AppCompatActivity {
         vacuumDetails = findViewById(R.id.vacuum_details);
         dockButton = findViewById(R.id.dock_button);
         setModeButton = findViewById(R.id.mode_button);
-        onOffSwitch = findViewById(R.id.switch_button);
+        onOffSwitch = findViewById(R.id.vacuum_switch);
         modeSpinner = findViewById(R.id.spinner);
         Context context = (Context) this;
 
@@ -201,7 +201,6 @@ public class VacuumDialog extends AppCompatActivity {
     }
 
     private void toggleButtons(boolean enabled){
-        dockButton.setEnabled(enabled);
         modeSpinner.setEnabled(enabled);
         setModeButton.setEnabled(enabled);
 

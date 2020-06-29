@@ -13,7 +13,7 @@ public class LightsState {
     @Expose
     private String color;
 
-    @SerializedName("intensity")
+    @SerializedName("brightness")
     @Expose
     private int intensity;
 
