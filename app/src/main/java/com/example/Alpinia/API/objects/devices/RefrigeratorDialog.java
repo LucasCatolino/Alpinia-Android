@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ public class RefrigeratorDialog extends AppCompatActivity {
     private Spinner spinMode;
     private Spinner spinFridge;
     private Spinner spinFreezer;
+    TextView fridgeName;
 
 
     // sobreescribo el onCreate para relacionarlo con el layout del refrigerator
@@ -35,8 +37,10 @@ public class RefrigeratorDialog extends AppCompatActivity {
         context = (Context) this;
         setContentView(R.layout.ref_card);
         // instancio la API
+        fridgeName = findViewById(R.id.ref_title);
         api = ApiClient.getInstance();
         deviceId = getIntent().getStringExtra("deviceId");
+        fridgeName.setText(getIntent().getStringExtra("deviceName"));
         // hago que las variables creadas referencian a los botones del layout
         spinMode = findViewById(R.id.ref_mode);
         spinFridge = findViewById(R.id.ref_fridge_temp);

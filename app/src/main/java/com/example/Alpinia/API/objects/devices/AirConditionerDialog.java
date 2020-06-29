@@ -53,6 +53,7 @@ public class AirConditionerDialog extends AppCompatActivity {
     private Spinner spinSpeed;
     private Switch switchOpenClose;
     TextView acDetails;
+    TextView acName;
 
     ArrayAdapter<CharSequence> tempAdapter;
 
@@ -70,6 +71,8 @@ public class AirConditionerDialog extends AppCompatActivity {
         context = (Context) this;
         api = ApiClient.getInstance();
         deviceId = getIntent().getStringExtra("deviceId");
+        acName = findViewById(R.id.ac_title);
+        acName.setText(getIntent().getStringExtra("deviceName"));
 
         switchOpenClose = (Switch) findViewById(R.id.open_close_ac);
         spinTemperature = (Spinner) findViewById(R.id.spin_temperature_ac);
