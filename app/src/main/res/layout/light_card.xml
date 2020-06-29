@@ -82,7 +82,7 @@
         android:id="@+id/color_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OPEN COLOR PICKER" />
+        android:text="@string/color_picker" />
 
 
 </LinearLayout>

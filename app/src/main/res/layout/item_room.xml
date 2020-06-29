@@ -51,7 +51,7 @@ app:cardElevation="@dimen/cardElevation">
         android:layout_marginLeft="320dp"
         android:layout_marginTop="-24dp"
         app:srcCompat="@drawable/ic_delete_black"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        />
 
     <TextView
         android:id="@+id/device_amount"

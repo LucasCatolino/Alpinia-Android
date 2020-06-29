@@ -305,7 +305,7 @@ public class SpeakerDialog extends AppCompatActivity {
 
                     onOffSwitch.setChecked(!state.isStopped());
                     if(state.getSong() != null) {
-                        songDetails.setText(state.getSong().getTitle() + " by " + state.getSong().getArtist());
+                        songDetails.setText(state.getSong().getTitle() +" "+ getResources().getString(R.string.by)+" " + state.getSong().getArtist());
                         progressBar.setLeft(0);
                         progressBar.setRight(getSeconds(state.getSong().getDuration()));
                         progressBar.setProgress(getSeconds(state.getSong().getProgress()));

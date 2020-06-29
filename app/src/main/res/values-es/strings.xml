@@ -60,16 +60,17 @@
     <string name="toast_IPAddressMissing">Dirección IP inválida</string>
     <string name ="error_dispensing">El número tiene que estar entre 1 y 100!</string>
     <string name ="started_dispensing">Se ha comenzado a dispensar!</string>
-
+    <string name="color_picker">Seleccionar color</string>
+    <string name="dock_vacuum">Cargar aspiradora</string>
     <string name="VacuumDialog">Aspiradora</string>
     <string name="ac_title">Aire Acondicionado</string>
     <string name="ac_mode">Modo</string>
     <string name="ac_temperature">Temperatura</string>
-    <string name="ac_vertical">Aspas Verticales</string>
-    <string name="ac_horizontal">Aspas Horizontales</string>
+    <string name="ac_vertical">Aspas verticales</string>
+    <string name="ac_horizontal">Aspas horizontales</string>
     <string name="alertwarn">¿Seguro quieres eliminar este elemento?</string>
     <string name="description_device">Aprete para ver mas sobre el dispositivo</string>
-    <string name="ac_speed">Porcentaje de Velocidad</string>
+    <string name="ac_speed">Porcentaje de velocidad</string>
     <string name="doorDialog">Puerta</string>
     <string name="SpeakerDialog">Parlante</string>
     <string name="AirConditionerDialog">Aire acondicionado</string>
@@ -89,6 +90,16 @@
     <string name="channelSpeaker_description">Administrar notificaciones para reproducción de musica</string>
     <string name="channelSpeaker_name">Administrar notificaciones sobre parlantes</string>
     <string name="no_rooms">No tiene habitaciones registradas en esta casa</string>
+
+    <string name="faucet_start">Dispensar</string>
+    <string name="tap_devices">Apreta para ver cuartos</string>
+    <string name="set_mode">Setear modo</string>
+    <string name="volume">volumen</string>
+    <string name="by">de</string>
+    <string name="device_name">Nombre del dispositivo</string>
+    <string name="add_devicee"> Agregar nuevo dispositivo</string>
+    <string name="dtype">Tipo del dispositivo</string>
+    <string name="addd">Agregar</string>
 
 
 </resources>

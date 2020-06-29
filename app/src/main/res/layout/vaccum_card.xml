@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
             android:layout_weight="1"
-            android:text="SET MODE" />
+            android:text="@string/set_mode" />
 
     </LinearLayout>
 
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:text="DOCK VACUUM"
+        android:text="@string/dock_vacuum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cancel_dispensing" />

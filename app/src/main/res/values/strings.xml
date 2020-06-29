@@ -204,7 +204,9 @@
 
 
     <string name="no_results">You don\'t have any homes</string>
-
+    <string name="color_picker"> Open color picker</string>
+    <string name="dock_vacuum">Dock vacuum</string>
+    <string name="faucet_start">Dispense</string>
     <!-- Manejo de errores -->
     <string name="error_message">Something went wrong: %1$s [%2$d]</string>
     <string name="room_activity">Devices</string>
@@ -242,6 +244,13 @@
     <string name="channelSpeaker_description">Manage speaker notifications</string>
     <string name="channelSpeaker_name">Speaker notifications</string>
     <string name="no_rooms">You do not have any room registered in this home</string>
-
+    <string name="tap_devices">Tap to see rooms</string>
+    <string name="set_mode">Set mode</string>
+    <string name="volume">Volume</string>
+    <string name="by">by</string>
+    <string name="device_name">Device name</string>
+    <string name ="add_devicee">Add a new device</string>
+    <string name="dtype">Device type</string>
+    <string name="addd">Add</string>
 
 </resources>
