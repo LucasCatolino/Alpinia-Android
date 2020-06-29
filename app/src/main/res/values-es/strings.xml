@@ -90,7 +90,6 @@
     <string name="channelSpeaker_description">Administrar notificaciones para reproducción de musica</string>
     <string name="channelSpeaker_name">Administrar notificaciones sobre parlantes</string>
     <string name="no_rooms">No tiene habitaciones registradas en esta casa</string>
-
     <string name="faucet_start">Dispensar</string>
     <string name="tap_devices">Apreta para ver cuartos</string>
     <string name="set_mode">Setear modo</string>
