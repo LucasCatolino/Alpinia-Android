@@ -47,7 +47,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         typeSpinner = findViewById(R.id.spinner2);
         deviceName = findViewById(R.id.editTextTextPersonName);
         addButton = findViewById(R.id.button);
-
+        context = this;
         api = ApiClient.getInstance();
         roomId = getIntent().getStringExtra("roomId");
 
